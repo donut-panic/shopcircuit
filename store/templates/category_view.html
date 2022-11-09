@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+      <h1 class="mb-5">{{ category.name }}</h1>
+    </div>
+    <div class="row">
+      {% for product in products_list %}
+        <div class="col">
+            <div class="card h-100">
+<!--              <a href="#"><img src="..." class="card-img-top" alt="..."></a>-->
+              <div class="card-body">
+                <h4 class="card-title"><a href="#" class="card-link text-decoration-none">{{ product.name }}</a></h4>
+                <h5 class="card-title mb-3">{{ product.price }}</h5>
+                <p class="card-text mb-4">{{ product.description }}</p>
+                <div><a href="#" class="btn btn-primary">Add to basket</a></div>
+              </div>
+            </div>
+          </div>
+      {% endfor %}
+    </div>
+</div>
+{%endblock %}

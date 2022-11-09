@@ -8,7 +8,7 @@ from django.db.models import CharField, TextField, ForeignKey, DO_NOTHING, Image
 
 # Create your models here.
 class Category(models.Model):
-    parent_id = ForeignKey('self', on_delete=DO_NOTHING)
+    parent_id = ForeignKey('self', on_delete=DO_NOTHING, blank=True, null=True)
     name = CharField(max_length=512, null=False)
 
 
