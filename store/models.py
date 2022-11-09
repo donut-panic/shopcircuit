@@ -7,22 +7,18 @@ from django.db.models import CharField, TextField, ForeignKey, DO_NOTHING, Image
 
 
 # Create your models here.
-
+class Category(models.Model):
+    parent_id = ForeignKey('self', on_delete=DO_NOTHING)
+    name = CharField(max_length=512, null=False)
 
 
 class Product(models.Model):
     name = CharField(max_length=512, null=False)
     description = TextField(default='Podaj opis.')
-    category = ForeignKey('Category', on_delete=DO_NOTHING)
+    category = ForeignKey(Category, on_delete=DO_NOTHING)
     image = ImageField(upload_to='static/images', blank=True, null=True)
     price = DecimalField(max_digits=12, decimal_places=2, null=False)
     quantity = IntegerField(null=False)
-
-
-
-class Category(models.Model):
-    parent_id = ForeignKey('self', on_delete= DO_NOTHING)
-    name = CharField(max_length=512 , null=False)
 
 
 class Order(models.Model):
@@ -32,18 +28,20 @@ class Order(models.Model):
         ('delivery', 'Your order is in delivery'),
         ('done', 'Product delivered'),
     ]
-    SHIPPING= [('DHL', 'DHL'),
+
+    SHIPPING = [('DHL', 'DHL'),
                ('poczta', 'Pocztex Kurier'),
                ('inpost', 'InPost'),
                ('orlen', 'Orlen Paczka')
     ]
+
     PAYMENT = [('creditcard', 'Chose credit card'),
                ('blik', 'Pay by BLIK'),
                ('paypal', 'Pay by PayPal'),
                ('banktransfer', 'Make a transfer via your bank')
     ]
 
-    order_by = IntegerField(null= False)
+    order_by = ForeignKey(User, on_delete=DO_NOTHING)
     status = CharField(max_length=128, choices=STATUS, default='payment')
     created = DateTimeField(default=datetime.now)
     address_street = CharField(max_length=256)
@@ -60,15 +58,15 @@ class Order(models.Model):
 
 
 class UnitOrder(models.Model):
-    order_id = ForeignKey('Order', on_delete=DO_NOTHING)
-    product_id = ForeignKey('Product', on_delete=DO_NOTHING)
-    quantity = IntegerField(null= False)
+    order_id = ForeignKey(Order, on_delete=DO_NOTHING)
+    product_id = ForeignKey(Product, on_delete=DO_NOTHING)
+    quantity = IntegerField(null=False)
 
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    password =
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     password =
 
 
 
