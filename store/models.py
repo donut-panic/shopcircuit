@@ -11,6 +11,9 @@ class Category(models.Model):
     parent_id = ForeignKey('self', on_delete=DO_NOTHING, blank=True, null=True)
     name = CharField(max_length=512, null=False)
 
+    def __str__(self):
+        return self.name
+
 
 class Product(models.Model):
     name = CharField(max_length=512, null=False)
@@ -19,6 +22,9 @@ class Product(models.Model):
     image = ImageField(upload_to='static/images', blank=True, null=True)
     price = DecimalField(max_digits=12, decimal_places=2, null=False)
     quantity = IntegerField(null=False)
+
+    def __str__(self):
+        return self.name
 
 
 class Order(models.Model):
@@ -61,7 +67,6 @@ class UnitOrder(models.Model):
     order_id = ForeignKey(Order, on_delete=DO_NOTHING)
     product_id = ForeignKey(Product, on_delete=DO_NOTHING)
     quantity = IntegerField(null=False)
-
 
 
 # class Profile(models.Model):
