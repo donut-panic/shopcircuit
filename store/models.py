@@ -67,14 +67,3 @@ class UnitOrder(models.Model):
     order_id = ForeignKey(Order, on_delete=DO_NOTHING)
     product_id = ForeignKey(Product, on_delete=DO_NOTHING)
     quantity = IntegerField(null=False)
-
-
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     password =
-
-
-
-
-
-
