@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DetailView
 
 from accounts.forms import SignUpForm, UserProfileUpdateForm
 from accounts.models import Profile
@@ -14,8 +14,15 @@ class SignUpView(CreateView):
     form_class = SignUpForm
     success_url = reverse_lazy('login')
 
+
 class ProfileUpdateView(UpdateView):
     template_name = "forms/form.html"
     form_class = UserProfileUpdateForm
     model = Profile
     success_url = reverse_lazy('index')
+
+
+
+class ProfileDetailsView(DetailView):
+    template_name = "profile.html"
+    model = Profile

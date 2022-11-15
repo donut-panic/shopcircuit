@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.forms import ChoiceField, CharField, ModelForm, Textarea, EmailField
 from tinymce import widgets
+from tinymce.widgets import TinyMCE
 
 from accounts.models import Profile
 
@@ -35,5 +36,6 @@ class UserProfileUpdateForm(ModelForm):
         fields = '__all__'
 
     gender = ChoiceField(choices=GENDER_CHOICES, required=False)
-    biography = CharField(label="Tell us your story with movies", widget=Textarea, required=False)
+    biography = CharField(label="Maybe something About yourself", widget=TinyMCE(attrs={'cols': 80, 'rows': 30}),
+                          required=False)
 
