@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="white-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <div class="product-image">
+                    <img src="{% static 'placeholder.jpg' %}" class="product-image__image">
+                </div>
+            </div>
+            <div class="col-7">
+                <div class="product-info">
+                    <div class="mb-3">
+                        <h4>{{ product.name }}</h4>
+                    </div>
+                    <div class="mb-3 product-info__orders">
+                        <span>
+                            <i class="bi bi-cart-check-fill"></i>
+                            <span>
+                                {% if orders == 1 %}
+                                    {{ orders }} order
+                                {% else %}
+                                    {{ orders }} orders
+                                {% endif %}
+                            </span>
+                        </span>
+                        <span> • </span>
+                        <span>
+                            {% if product.quantity > 0 %}
+                                Available ({{ product.quantity }})
+                            {% else %}
+                                Not available
+                            {% endif %}
+                        </span>
+                    </div>
+                    <div class="mb-3">
+                        <h5>${{ product.price }}</h5>
+                    </div>
+                    <div class="product-info__description mb-3">
+                        <p>{{ product.description }}</p>
+                    </div>
+                    <div>
+                        {% if product.quantity > 1 %}
+                            <a href="#" class="btn btn-primary me-2"><i class="bi bi-cart3"></i> Add to cart</a>
+                        {% else %}
+                            <a href="#" class="btn btn-secondary me-2 disabled"><i class="bi bi-cart3"></i> Add to cart</a>
+                        {% endif %}
+                        <a href="#" class="btn btn-outline-secondary"><i class="bi bi-heart-fill"></i> Add to wishlist</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock %}
