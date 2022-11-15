@@ -16,7 +16,7 @@ class SignUpView(CreateView):
 
 
 class ProfileUpdateView(UpdateView):
-    template_name = "forms/form.html"
+    template_name = "base_form.html"
     form_class = UserProfileUpdateForm
     model = Profile
     success_url = reverse_lazy('index')

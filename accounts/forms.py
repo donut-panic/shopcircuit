@@ -36,6 +36,6 @@ class UserProfileUpdateForm(ModelForm):
         fields = '__all__'
 
     gender = ChoiceField(choices=GENDER_CHOICES, required=False)
-    biography = CharField(label="Maybe something About yourself", widget=TinyMCE(attrs={'cols': 80, 'rows': 30}),
+    biography = CharField(label="Maybe something About yourself", widget=TinyMCE(),
                           required=False)
 
