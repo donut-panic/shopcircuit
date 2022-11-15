@@ -168,3 +168,5 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
 
 LOGIN_REDIRECT_URL = '/accounts/password_change'
+
+
