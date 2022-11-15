@@ -19,7 +19,7 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView,
     PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.urls import path
 
-from accounts.views import SignUpView
+from accounts.views import SignUpView, ProfileUpdateView
 
 # app_name = 'accounts'
 
@@ -27,16 +27,17 @@ urlpatterns = [
     path('sign_up/', SignUpView.as_view(), name='sign_up'),
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('password_change/', PasswordChangeView.as_view(),
+    path('password_change/', PasswordChangeView.as_view(template_name='base_form.html'),
     name='password_change'),
     path('password_change/done/', PasswordChangeDoneView.as_view(),
     name='password_change_done'),
-    path('password_reset/', PasswordResetView.as_view(),
+    path('password_reset/', PasswordResetView.as_view(template_name='password_reset.html'),
     name='password_reset'),
     path('password_reset/done/', PasswordResetDoneView.as_view(),
     name='password_reset_done'),
     path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(),
     name='password_reset_confirm'),
     path('reset/done/', PasswordResetCompleteView.as_view(),
-    name='password_reset_complete')
+    name='password_reset_complete'),
+    path('profile', ProfileUpdateView.as_view(), name='profile_view')
 ]
