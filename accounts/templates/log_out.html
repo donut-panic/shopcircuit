@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+
+<p class="h3 mt-5" > Logged out </p>
+Thanks for spending some quality time with the web site today.
+
+<hr>
+<a class='ml-5 h4' href= "{% url 'login' %}">Log in again</a>
+</div>
+
+{% endblock %}

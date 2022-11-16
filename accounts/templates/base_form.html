@@ -3,7 +3,7 @@
 {% block content %}
 <form method="post" class="container mt-5 col-lg-5">
   {% csrf_token %}
-
+{{ form.media }}
   {% for hidden_field in form.hidden_fields %}
     {{ hidden_field }}
   {% endfor %}
@@ -41,6 +41,6 @@
     </div>
   {% endfor %}
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary mt-5">Submit</button>
 </form>
 {% endblock %}
