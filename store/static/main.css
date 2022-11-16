@@ -245,3 +245,127 @@
     color: rgba(255,255,255,.3);
 }
 
+/* CART */
+
+.cart__products {
+
+}
+
+.cart__sidebar {
+    background: #fff;
+    padding: 30px;
+    border: 1px solid rgba(81,88,94,.12);
+    box-shadow: 0 0.05rem 0.2rem rgb(0 0 0 / 3%);
+    border-radius: 0.35rem;
+}
+
+.cart__total-price {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(81,88,94,.12);
+}
+
+.cart__sidebar-price {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.cart__checkout-button {
+    width: 100%;
+}
+
+.cart__narrative {
+    font-size: 2em;
+    text-align: center;
+    color: #ccc;
+}
+
+.cart__product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 30px;
+    border: 1px solid rgba(81,88,94,.12);
+    box-shadow: 0 0.05rem 0.2rem rgb(0 0 0 / 3%);
+    border-radius: 0.35rem;
+}
+
+.cart__image-link {
+    text-decoration: none;
+}
+
+.cart__image {
+    width: 72px;
+    height: 72px;
+    border: 1px solid #dee2e6;
+    border-radius: 0.35rem;
+    background-color: #fff;
+}
+
+.cart__product-link {
+    color: #51585e;
+    text-decoration: none;
+}
+
+.cart__product-area {
+    display: flex;
+    align-items: center;
+}
+
+.cart__quantity {
+    display: flex
+}
+
+.cart__button {
+    text-decoration: none;
+    text-align: center;
+    width: 42px;
+    line-height: 1.5em;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.35rem;
+    transition: .2s;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: rgb(153, 153, 153);
+}
+
+.cart__button:hover {
+    background: #f9fafb;
+    border-color: #c1c9d0;
+}
+
+.cart__button--left {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.cart__button--right {
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.cart__product-category {
+    color: #9da1a7;
+    text-decoration: none;
+}
+
+.cart__input {
+    border: 1px solid #dee2e6;
+    background: #f9f9f9;
+    height: 40px;
+    width: 80px;
+    text-align: center;
+}
+
+.cart__price {
+    color: #212529;
+    font-weight: bold;
+}
+
+
+

@@ -57,13 +57,51 @@ class AddProductToCartView(View):
 class CartView(View):
     def get(self, request):
         if "cart" in request.session:
-            cart = request.session["cart"]
+            in_cart = []
+            overall_price = 0
+            for item in request.session["cart"]:
+                product = Product.objects.select_related("category").get(id=item["id"])
+                total_price = product.price * item["quantity"]
+                in_cart.append({
+                    "product": product,
+                    "quantity": item["quantity"],
+                    "total_price": total_price
+                })
+                overall_price += total_price
         return render(
             request,
             template_name="cart/cart_view.html",
             context={
+                "categories": Category.objects.all(),
                 "cart": len(request.session["cart"]) if "cart" in request.session else 0,
-                "cart_content": cart
-
+                "products": in_cart if len(in_cart) > 0 else None,
+                "overall_price": overall_price
             }
         )
+
+
+class DeleteFromCartView(View):
+    def get(self, request, pk):
+        cart = request.session["cart"]
+        request.session["cart"] = [item for item in cart if item["id"] != pk]
+        return redirect("store:cart_view")
+
+
+class IncreaseQuantityInCart(View):
+    def get(self, request, pk):
+        cart = request.session["cart"]
+        for item in cart:
+            if item["id"] == pk:
+                item["quantity"] -= 1
+        request.session["cart"] = cart
+        return redirect("store:cart_view")
+
+
+class DecreaseQuantityInCart(View):
+    def get(self, request, pk):
+        cart = request.session["cart"]
+        for item in cart:
+            if item["id"] == pk:
+                item["quantity"] += 1
+        request.session["cart"] = cart
+        return redirect("store:cart_view")
