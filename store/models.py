@@ -22,44 +22,49 @@ class Product(models.Model):
     image = ImageField(upload_to='static/images', blank=True, null=True)
     price = DecimalField(max_digits=12, decimal_places=2, null=False)
     quantity = IntegerField(null=False)
+    tax = DecimalField(max_digits=12, decimal_places=2, null=False)
+
+    def __str__(self):
+        return self.name
+
+
+class ShippingMethod(models.Model):
+    shipping_company = CharField(max_length=512, null=False)
+    service_name = CharField(max_length=512, null=False)
+    price = DecimalField(max_digits=12, decimal_places=2, null=False)
+    tax = DecimalField(max_digits=12, decimal_places=2, null=False)
+
+    def __str__(self):
+        return self.service_name
+
+
+class PaymentMethod(models.Model):
+    service_name = CharField(max_length=512, null=False)
+
+    def __str__(self):
+        return self.service_name
+
+
+class OrderStatus(models.Model):
+    name = CharField(max_length=512)
 
     def __str__(self):
         return self.name
 
 
 class Order(models.Model):
-    STATUS = [
-        ('payment', 'Waiting For Payment'),
-        ('pending', 'Your order is being confirmed by us'),
-        ('delivery', 'Your order is in delivery'),
-        ('done', 'Product delivered'),
-    ]
-
-    SHIPPING = [('DHL', 'DHL'),
-                ('poczta', 'Pocztex Kurier'),
-                ('inpost', 'InPost'),
-                ('orlen', 'Orlen Paczka')
-                ]
-
-    PAYMENT = [('creditcard', 'Chose credit card'),
-               ('blik', 'Pay by BLIK'),
-               ('paypal', 'Pay by PayPal'),
-               ('banktransfer', 'Make a transfer via your bank')
-               ]
-
     order_by = ForeignKey(User, on_delete=DO_NOTHING)
-    status = CharField(max_length=128, choices=STATUS, default='payment')
+    ForeignKey(OrderStatus, on_delete=DO_NOTHING)
     created = DateTimeField(default=datetime.now)
     address_street = CharField(max_length=256)
     address_postal_code = CharField(max_length=18)
     address_city = CharField(max_length=128)
-    shipping = CharField(max_length=128, choices=SHIPPING, default='inpost')
+    shipping = ForeignKey(ShippingMethod, on_delete=DO_NOTHING)
     payment = DecimalField(max_digits=12, decimal_places=2, null=False)
-    payment_method = CharField(max_length=128, choices=PAYMENT, default='creditcard')
+    payment_method = ForeignKey(PaymentMethod, on_delete=DO_NOTHING)
 
-    # @property
-    # def GDP_per_capita(self):
-    #     return round(self.GDP / self.Populacja, 3)
+    def __str__(self):
+        return self.id
 
 
 class UnitOrder(models.Model):
@@ -67,4 +72,5 @@ class UnitOrder(models.Model):
     product_id = ForeignKey(Product, on_delete=DO_NOTHING)
     quantity = IntegerField(null=False)
 
-
+    def __str__(self):
+        return self.id
