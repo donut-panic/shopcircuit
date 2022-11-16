@@ -4,21 +4,40 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import CharField, TextField, ForeignKey, DO_NOTHING, ImageField, DecimalField, IntegerField, \
     DateTimeField
+from smart_selects.db_fields import ChainedForeignKey
 
 
 # Create your models here.
-class Category(models.Model):
-    parent_id = ForeignKey('self', on_delete=DO_NOTHING, blank=True, null=True)
-    name = CharField(max_length=512, null=False)
+
+
+class TypeProduct(models.Model):
+    type = CharField(max_length=30)
 
     def __str__(self):
-        return self.name
+        return self.type
+
+
+class SubTypeProduct(models.Model):
+    type_product = ForeignKey(TypeProduct, on_delete=models.CASCADE)
+    sub_type = CharField(max_length=30)
+
+    def __str__(self):
+        return self.sub_type
+
 
 
 class Product(models.Model):
     name = CharField(max_length=512, null=False)
     description = TextField(default='Podaj opis.')
-    category = ForeignKey(Category, on_delete=DO_NOTHING)
+    type_product = ForeignKey(TypeProduct, on_delete=models.SET_NULL, null=True)
+    # sub_type = ChainedForeignKey(
+    #     TypeProduct,
+    #     chained_field="type_product",
+    #     chained_model_field="type_product",
+    #     show_all=False,
+    #     auto_choose=True,
+    #     sort=True)
+    sub_type = ForeignKey(SubTypeProduct, on_delete=models.SET_NULL, null=True)
     image = ImageField(upload_to='static/images', blank=True, null=True)
     price = DecimalField(max_digits=12, decimal_places=2, null=False)
     quantity = IntegerField(null=False)
@@ -63,7 +82,15 @@ class Order(models.Model):
     #     return round(self.GDP / self.Populacja, 3)
 
 
+
+
 class UnitOrder(models.Model):
     order_id = ForeignKey(Order, on_delete=DO_NOTHING)
     product_id = ForeignKey(Product, on_delete=DO_NOTHING)
     quantity = IntegerField(null=False)
+
+
+
+
+
+

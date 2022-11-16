@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, DetailView
 
-from store.models import Product, Category, UnitOrder
+from store.models import Product, UnitOrder, TypeProduct, SubTypeProduct
 
 
 class StoreMainView(TemplateView):
@@ -18,9 +18,9 @@ class StoreCategoryView(View):
             template_name="category/category_view.html",
             context={
                 "products_list": Product.objects.filter(category_id=pk),
-                "category": Category.objects.get(id=pk),
-                "categories": Category.objects.filter(parent_id__isnull=True),
-                "subcategories": Category.objects.filter(parent_id=pk),
+                "category": TypeProduct.objects.get(id=pk),
+                "categories": TypeProduct.objects.filter(parent_id__isnull=True),
+                "subcategories": SubTypeProduct.objects.filter(parent_id=pk),
                 "cart": len(request.session["cart"]) if "cart" in request.session else 0
             }
         )
@@ -32,7 +32,7 @@ class ProductView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["categories"] = Category.objects.all()
+        context["categories"] = TypeProduct.objects.all()
         context["orders"] = UnitOrder.objects.filter(product_id=self.get_object()).count()
         context["cart"] = len(self.request.session["cart"]) if "cart" in self.request.session else 0
         return context
