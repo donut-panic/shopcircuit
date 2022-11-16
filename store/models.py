@@ -36,16 +36,16 @@ class Order(models.Model):
     ]
 
     SHIPPING = [('DHL', 'DHL'),
-               ('poczta', 'Pocztex Kurier'),
-               ('inpost', 'InPost'),
-               ('orlen', 'Orlen Paczka')
-    ]
+                ('poczta', 'Pocztex Kurier'),
+                ('inpost', 'InPost'),
+                ('orlen', 'Orlen Paczka')
+                ]
 
     PAYMENT = [('creditcard', 'Chose credit card'),
                ('blik', 'Pay by BLIK'),
                ('paypal', 'Pay by PayPal'),
                ('banktransfer', 'Make a transfer via your bank')
-    ]
+               ]
 
     order_by = ForeignKey(User, on_delete=DO_NOTHING)
     status = CharField(max_length=128, choices=STATUS, default='payment')
@@ -57,7 +57,6 @@ class Order(models.Model):
     payment = DecimalField(max_digits=12, decimal_places=2, null=False)
     payment_method = CharField(max_length=128, choices=PAYMENT, default='creditcard')
 
-
     # @property
     # def GDP_per_capita(self):
     #     return round(self.GDP / self.Populacja, 3)
@@ -67,3 +66,5 @@ class UnitOrder(models.Model):
     order_id = ForeignKey(Order, on_delete=DO_NOTHING)
     product_id = ForeignKey(Product, on_delete=DO_NOTHING)
     quantity = IntegerField(null=False)
+
+

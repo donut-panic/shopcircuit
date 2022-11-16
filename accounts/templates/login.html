@@ -1,15 +1,12 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
-
 {% block content %}
-<h3 class="title text-center text-primary mt-5 col-lg"> Welcome to our shop ! <br>Please Login</h3>
+<h3 class="h1 text-center text-primary my-5 col-lg"> Welcome to our shop ! <br>Please Login</h3>
 <form method="post" class="container mt-5 col-lg-5">
   {% csrf_token %}
-
 {% for hidden_field in form.hidden_fields %}
     {{ hidden_field }}
   {% endfor %}
-
   {% if form.non_field_errors %}
     <div class="alert alert-danger" role="alert">
       {% for error in form.non_field_errors %}
@@ -17,37 +14,27 @@
       {% endfor %}
     </div>
   {% endif %}
-
-  {% for field in form.visible_fields %}
+  {% for field in form.visible_fields|slice:2 %}
     <div class="form-group">
       {{ field.label_tag }}
-
         {% render_field field class="form-control" %}
-
       {% if field.help_text %}
         <small class="form-text text-muted">{{ field.help_text }}</small>
       {% endif %}
     </div>
   {% endfor %}
-
-  <!-- 2 column grid layout for inline styling -->
   <div class="row mb-4">
     <div class="col d-flex justify-content-center">
-      <!-- Checkbox -->
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="Submit" id="form2Example31" checked />
-        <label class="form-check-label" for="form2Example31"> Remember me </label>
+        {% render_field form.remember_me class="form-check-input" id='remember_me' %}
+        {% render_field form.remember_me.label  %}
+
       </div>
     </div>
-
     <div class="col">
-<!--       Simple link-->
     <a href= "{% url 'password_reset' %}">Forgot password?</a>
     </div>
   </div>
-
-<!--   Submit button-->
   <input type="submit" value="Submit" class="btn btn-primary btn-block mb-4">
-
 </form>
 {% endblock %}

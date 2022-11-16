@@ -3,18 +3,32 @@
 {% block content %}
 
 <div class="container pt-4">
+    <div class="row">
+        <div class="col">
         {% if profile.image %}
         <img class="rounded-0 account-img float-start me-4 " src={{ profile.image.url }}  width="150"
     height="150">
         {% endif %}
         <h2>User Name: <br>{{ profile.user.username }}</h2>
-        <p><b>Gender:</b> {{ profile.gender|default:"Not specified" }}</p>
+        <p><b>Gender:</b> <span class="text-secondary" >{{ profile.gender|default:"Not specified" }}</span></p>
+    <a href= "{{profile.user.id}}/update">Update your data here</a>
+        </div>
+        <div class="col">
+    <div class="list-group list-inline" id="speciesList">
+     <p class="text text-secondary">Jump to:</p>
+     <a class='scrolldown-click' role='button' href='#My-cart'><div class='label label-sm label-success speciesDiv'>My cart</div></a>
+     <a class='scrolldown-click' role='button' href='#Shop-Homepage'><div class='label label-sm label-success speciesDiv'>Shop Homepage</div></a>
+     <a class='scrolldown-click' role='button' href='#Wishlist'><div class='label label-sm label-success speciesDiv'>Wishlist</div></a>
+</div>
+        </div>
+        <div class="col">
 
+        </div>
+    </div>
     <hr>
-    <br>
-    <div class="col-6 py-2">
-        <b>Some info on me:</b>
-        <div class="shadow p-2 mb-3 bg-white rounded">
+    <div class="col-8 py-2">
+        <b class="h3">Some info on me:</b>
+        <div class="shadow p-3 mb-5 bg-white rounded">
         {{ profile.biography|safe }}
         </div>
         </div>

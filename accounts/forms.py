@@ -1,5 +1,7 @@
-from django.contrib.auth.forms import UserCreationForm, UsernameField
-from django.forms import ChoiceField, CharField, ModelForm, Textarea, EmailField
+import django.forms
+from django.contrib.auth.forms import UserCreationForm, UsernameField, AuthenticationForm
+from django.forms import ChoiceField, CharField, ModelForm, Textarea, EmailField, PasswordInput, BooleanField, \
+    CheckboxInput
 from tinymce import widgets
 from tinymce.widgets import TinyMCE
 
@@ -39,3 +41,10 @@ class UserProfileUpdateForm(ModelForm):
     biography = CharField(label="Maybe something About yourself", widget=TinyMCE(),
                           required=False)
 
+
+
+
+
+class LoginForm(AuthenticationForm):
+    remember_me = BooleanField(label='Remember me', initial=False,
+                                     required=False, widget=CheckboxInput(attrs={'class': 'form-check'}))

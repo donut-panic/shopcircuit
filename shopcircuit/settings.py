@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'tinymce',
     'store',
     'accounts',
-    'widget_tweaks'
+    'widget_tweaks',
+    'smart_selects',
 ]
 
 MIDDLEWARE = [
@@ -91,14 +92,13 @@ DATABASES = {
 }
 
 TINYMCE_DEFAULT_CONFIG = {
-    "height": "400",
-    "width": "960",
+    "height": "500",
+    "width": "800",
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 20,
     'selector': 'textarea',
     'content_css': 'writer',
-    'skin': "oxide-dark",
-    'content_css': "dark",
+    # 'skin': "oxide-dark",
     'plugins': '''
             textcolor save link image media preview codesample contextmenu
             table code lists fullscreen  insertdatetime  nonbreaking
@@ -111,8 +111,6 @@ TINYMCE_DEFAULT_CONFIG = {
             fontsizeselect  | forecolor backcolor | alignleft alignright |
             aligncenter alignjustify | indent outdent | bullist numlist table |
             | link image media | codesample |
-            ''',
-    'toolbar2': '''
             visualblocks visualchars |
             charmap hr pagebreak nonbreaking anchor |  code | superscript | subscript |
             ''',
@@ -169,6 +167,6 @@ MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
 
-LOGIN_REDIRECT_URL = '/accounts/password_change'
+LOGIN_REDIRECT_URL = '/accounts/profile/home'
 
 
