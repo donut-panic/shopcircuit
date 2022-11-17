@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+USE_DJANGO_JQUERY = True
 ALLOWED_HOSTS = []
 
 
@@ -73,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'accounts.contex_processors.profile_pic',
             ],
         },
     },
@@ -104,20 +105,22 @@ TINYMCE_DEFAULT_CONFIG = {
             table code lists fullscreen  insertdatetime  nonbreaking
             contextmenu directionality searchreplace wordcount visualblocks
             visualchars code fullscreen autolink lists  charmap print  hr
-            anchor pagebreak
+            anchor pagebreak emoticons
             ''',
     'toolbar1': '''
             fullscreen preview bold italic underline | fontselect,
             fontsizeselect  | forecolor backcolor | alignleft alignright |
             aligncenter alignjustify | indent outdent | bullist numlist table |
             | link image media | codesample |
-            visualblocks visualchars |
+            visualblocks visualchars | emoticons
             charmap hr pagebreak nonbreaking anchor |  code | superscript | subscript |
             ''',
     'contextmenu': 'formats | link image',
     'menubar': True,
     'statusbar': True,
+    'emoticons_images_url': 'http://my.server/images/emoticons/',
 }
+
 
 
 

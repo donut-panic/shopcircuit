@@ -6,19 +6,34 @@ from django.db.models import CharField, TextField, ForeignKey, DO_NOTHING, Image
     DateTimeField
 
 
+from smart_selects.db_fields import ChainedForeignKey
+
 # Create your models here.
 class Category(models.Model):
-    parent_id = ForeignKey('self', on_delete=DO_NOTHING, blank=True, null=True)
-    name = CharField(max_length=512, null=False)
+    name = CharField(max_length=512, null=False, default='other')
 
     def __str__(self):
         return self.name
 
+class LeCategory(models.Model):
+    category_id = ForeignKey(Category, on_delete=DO_NOTHING, default='other')
+    name = CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
 
 class Product(models.Model):
     name = CharField(max_length=512, null=False)
     description = TextField(default='Podaj opis.')
     category = ForeignKey(Category, on_delete=DO_NOTHING)
+    subcategory = ChainedForeignKey(
+        LeCategory,
+        chained_field='category',
+        chained_model_field='category_id',
+        show_all=False,
+        auto_choose=True,
+        sort=True
+    )
     image = ImageField(upload_to='static/images', blank=True, null=True)
     price = DecimalField(max_digits=12, decimal_places=2, null=False)
     quantity = IntegerField(null=False)

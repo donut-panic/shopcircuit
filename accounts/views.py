@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, request
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DetailView
@@ -18,6 +19,8 @@ class SignUpView(CreateView):
     success_url = reverse_lazy('login')
 
 
+
+
 class ProfileUpdateView(UpdateView):
     template_name = "base_form.html"
     form_class = UserProfileUpdateForm
@@ -28,12 +31,14 @@ class ProfileUpdateView(UpdateView):
 
 
 
-class ProfileDetailsView(DetailView):
+class ProfileDetailsView(LoginRequiredMixin, DetailView):
     template_name = "profile.html"
     model = Profile
 
 
 class UpdatedLoginView(LoginView):
+
+
     form_class = LoginForm
     def form_valid(self, form):
         remember_me = form.cleaned_data['remember_me']
@@ -41,6 +46,10 @@ class UpdatedLoginView(LoginView):
             self.request.session.set_expiry(0)  # if remember me is
             self.request.session.modified = True
         return super(UpdatedLoginView, self).form_valid(form)
+
+
+
+
 
 
 @login_required
