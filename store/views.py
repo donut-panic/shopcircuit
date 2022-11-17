@@ -45,7 +45,6 @@ class ProductView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["categories"] = Category.objects.all()
         context["orders"] = UnitOrder.objects.filter(product_id=self.get_object()).count()
         context["cart"] = len(self.request.session["cart"]) if "cart" in self.request.session else 0
         return context
@@ -85,7 +84,6 @@ class CartView(View):
             request,
             template_name="cart/cart_view.html",
             context={
-                "categories": Category.objects.all(),
                 "cart": len(request.session["cart"]) if "cart" in request.session else 0,
                 "products": in_cart if len(in_cart) > 0 else None,
                 "overall_price": overall_price
