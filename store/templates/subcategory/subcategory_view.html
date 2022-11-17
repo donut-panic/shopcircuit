@@ -5,14 +5,7 @@
 <div class="grey-container">
     <div class="container mt-3">
         <div class="row">
-          <h1 class="mb-5">{{ category.name }}</h1>
-        </div>
-        <div class="row mb-5">
-            <div class="subcategories">
-                {% for subcategory in lecategories %}
-                    <a href="{% url 'store:leproduct_view' subcategory.id %}" class="subcategories__badge">{{ subcategory.name }}</a>
-                {% endfor %}
-            </div>
+          <h1 class="mb-5">{{ lecategory.name }}</h1>
         </div>
         <div class="row">
           {% for product in products_list %}

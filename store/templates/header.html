@@ -3,7 +3,9 @@
     <div class="container">
       <div class="nav__row">
         <div class="nav__logo">
+          <a href="{% url 'store:store_main_view' %}">
           <img src="{% static 'shopcircuit.svg' %}" alt="ShopCircuit">
+            </a>
         </div>
         <div class="nav__search">
           <div class="input-group">
@@ -13,10 +15,17 @@
         </div>
         <div class="nav__icons-area">
           <div class="nav__icon">
+            {% if picture_profile %}
+            <a href="{% url 'login' %}" class="nav__link">
+              <img src="{{picture_profile.url }}" class="avatar" style="width:50px;height:50px;">
+<!--              <span class="nav__icon-text">Login</span>-->
+            </a>
+            {% else %}
             <a href="{% url 'login' %}" class="nav__link">
               <i class="bi bi-person-fill nav__icon-font"></i>
               <span class="nav__icon-text">Login</span>
             </a>
+          {% endif %}
           </div>
           <div class="nav__icon ms-5">
             <a href="{% url 'store:cart_view' %}" class="nav__link">

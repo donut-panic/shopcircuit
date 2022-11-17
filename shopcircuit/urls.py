@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LoginView
+from django.template.defaulttags import url
 from django.urls import include, path
 
 from shopcircuit import settings
@@ -25,7 +26,7 @@ urlpatterns = [
     path('tinymce/', include('tinymce.urls')),
     path('accounts/', include('accounts.urls')),
     path('store/', include('store.urls')),
-    path('chaning/', include('smart_selects.urls'))
+    path('chaining/', include('smart_selects.urls'))
 ]
 
 
