@@ -20,7 +20,6 @@ class StoreCategoryView(View):
                 "products_list": Product.objects.filter(category_id=pk),
                 "category": Category.objects.get(id=pk),
                 "lecategories": LeCategory.objects.filter(category_id_id=pk),
-                "cart": len(request.session["cart"]) if "cart" in request.session else 0
             }
         )
 
@@ -34,7 +33,6 @@ class LeStoreCategoryView(View):
                 "products_list": Product.objects.filter(subcategory_id=pk),
                 "lecategory": LeCategory.objects.get(id=pk),
                 "lecategories_list": LeCategory.objects.filter(category_id_id=pk),
-                "cart": len(request.session["cart"]) if "cart" in request.session else 0
             }
         )
 
@@ -46,7 +44,6 @@ class ProductView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["orders"] = UnitOrder.objects.filter(product_id=self.get_object()).count()
-        context["cart"] = len(self.request.session["cart"]) if "cart" in self.request.session else 0
         return context
 
 
@@ -84,7 +81,6 @@ class CartView(View):
             request,
             template_name="cart/cart_view.html",
             context={
-                "cart": len(request.session["cart"]) if "cart" in request.session else 0,
                 "products": in_cart if len(in_cart) > 0 else None,
                 "overall_price": overall_price
             }
