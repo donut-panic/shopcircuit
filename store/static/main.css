@@ -42,6 +42,7 @@
 
 .product-card__data {
     padding: 20px;
+    height: 120px;
 }
 
 .product-card__name {
