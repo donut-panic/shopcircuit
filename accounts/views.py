@@ -56,4 +56,4 @@ class UpdatedLoginView(LoginView):
 def home(request):
     return HttpResponseRedirect(
         reverse('profile_view',
-                args=[request.user.id]))
+                args=[request.user.profile.id]))
