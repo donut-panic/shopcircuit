@@ -1,25 +1,25 @@
 {% load static %}
-
   <nav class="nav">
     <div class="container">
       <div class="nav__row">
         <div class="nav__logo">
           <a href="{% url 'store:store_main_view' %}">
-          <img src="{% static 'shopcircuit.svg' %}" alt="ShopCircuit" class="nav__image">
+          <img src="{% static 'shopcircuit.svg' %}" alt="ShopCircuit">
             </a>
         </div>
-        <div class="nav__search">
+        <form class="nav__search" method=POST action=" {% url 'store:search_venues' %} ">
+          {% csrf_token %}
           <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for products">
-              <button class="btn btn-outline-primary" type="button" id="button-addon2">Search</button>
+              <input type="Search" class="form-control" placeholder="Search for products">
+              <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
           </div>
-        </div>
+        </form>
         <div class="nav__icons-area">
           <div class="nav__icon">
-            {% if user.is_authenticated %}
-            <a href="{% url 'home' %}" class="nav__link">
-              <img src="{{picture_profile.url }}" class="profile__avatar">
-            <a href="{% url 'logout' %}"> <span class="nav__icon-text">Logout</span>
+            {% if picture_profile %}
+            <a href="{% url 'login' %}" class="nav__link">
+              <img src="{{picture_profile.url }}" class="avatar" style="width:50px;height:50px;">
+<!--              <span class="nav__icon-text">Login</span>-->
             </a>
             {% else %}
             <a href="{% url 'login' %}" class="nav__link">
@@ -31,7 +31,7 @@
           <div class="nav__icon ms-5">
             <a href="{% url 'store:cart_view' %}" class="nav__link">
               <i class="bi bi-cart-fill nav__icon-font"></i>
-              <span class="nav__icon-text">My cart ({{ cart }})</span>
+              <span class="nav__icon-text">My cart ({{ cart_items_number }})</span>
             </a>
           </div>
           <div class="nav__icon ms-5">

@@ -20,7 +20,6 @@ class StoreCategoryView(View):
                 "products_list": Product.objects.filter(category_id=pk),
                 "category": Category.objects.get(id=pk),
                 "lecategories": LeCategory.objects.filter(category_id_id=pk),
-                "cart": len(request.session["cart"]) if "cart" in request.session else 0
             }
         )
 
@@ -34,7 +33,6 @@ class LeStoreCategoryView(View):
                 "products_list": Product.objects.filter(subcategory_id=pk),
                 "lecategory": LeCategory.objects.get(id=pk),
                 "lecategories_list": LeCategory.objects.filter(category_id_id=pk),
-                "cart": len(request.session["cart"]) if "cart" in request.session else 0
             }
         )
 
@@ -45,9 +43,7 @@ class ProductView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["categories"] = Category.objects.all()
         context["orders"] = UnitOrder.objects.filter(product_id=self.get_object()).count()
-        context["cart"] = len(self.request.session["cart"]) if "cart" in self.request.session else 0
         return context
 
 
@@ -69,26 +65,30 @@ class AddProductToCartView(View):
 
 class CartView(View):
     def get(self, request):
+        in_cart = []
+        overall_price = 0
+        overall_tax = 0
         if "cart" in request.session:
-            in_cart = []
             overall_price = 0
             for item in request.session["cart"]:
                 product = Product.objects.select_related("category").get(id=item["id"])
                 total_price = product.price * item["quantity"]
+                tax = (total_price * product.tax)
                 in_cart.append({
                     "product": product,
                     "quantity": item["quantity"],
-                    "total_price": total_price
+                    "total_price": total_price,
+                    "tax": tax
                 })
                 overall_price += total_price
+                overall_tax += tax
         return render(
             request,
             template_name="cart/cart_view.html",
             context={
-                "categories": Category.objects.all(),
-                "cart": len(request.session["cart"]) if "cart" in request.session else 0,
                 "products": in_cart if len(in_cart) > 0 else None,
-                "overall_price": overall_price
+                "overall_price": overall_price,
+                "overall_tax": overall_tax
             }
         )
 
@@ -106,7 +106,7 @@ class IncreaseQuantityInCart(View):
         for item in cart:
             if item["id"] == pk:
                 item["quantity"] -= 1
-        request.session["cart"] = cart
+        request.session["cart"] = [item for item in cart if item["quantity"] > 0]
         return redirect("store:cart_view")
 
 
@@ -118,3 +118,9 @@ class DecreaseQuantityInCart(View):
                 item["quantity"] += 1
         request.session["cart"] = cart
         return redirect("store:cart_view")
+
+
+def search_venues(request):
+    return render(request,
+                  'search_product/search_product.html',
+                  {})
