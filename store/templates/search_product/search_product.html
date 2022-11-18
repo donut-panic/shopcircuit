@@ -2,7 +2,15 @@
 {% load static %}
 
 {% block content %}
-<h1>Testing ..... </h1>
-{%endblock %}
+{% if searched %}
+<h1>You searched for.. </h1>
+{{searched}}
+{% for venue in venues %}
+{{ venue }}
+{% endfor %}
+{% else %}
+<h1> you didn't search for anything !</h1>
+{% endif %}
+{% endblock %}
 
 

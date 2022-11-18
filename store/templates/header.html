@@ -10,7 +10,7 @@
         <form class="nav__search" method=POST action=" {% url 'store:search_venues' %} ">
           {% csrf_token %}
           <div class="input-group">
-              <input type="Search" class="form-control" placeholder="Search for products">
+              <input type="Search" class="form-control" placeholder="Search for products" name="searched">
               <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
           </div>
         </form>
