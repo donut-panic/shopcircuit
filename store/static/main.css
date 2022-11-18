@@ -386,5 +386,24 @@
 
 }
 
+/* CART */
+
+.profile__image {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 40%;
+}
+
+.profile__image:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
 
 
+.search__image_sad {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    max-width: 12%;
+    height: auto
+}
