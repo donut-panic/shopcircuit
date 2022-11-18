@@ -121,7 +121,7 @@ class DecreaseQuantityInCart(View):
 def search_venues(request):
     if request.method == "POST":
         searched = request.POST.get('searched')
-        venues = Product.objects.filter(name=searched)
+        venues = Product.objects.filter(name__icontains=searched)
         return render(request,
                       'search_product/search_product.html', {'searched': searched, 'venues': venues})
     else:
