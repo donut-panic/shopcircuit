@@ -1,6 +1,4 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, DetailView
 
@@ -118,3 +116,14 @@ class DecreaseQuantityInCart(View):
                 item["quantity"] += 1
         request.session["cart"] = cart
         return redirect("store:cart_view")
+
+
+def search_venues(request):
+    if request.method == "POST":
+        searched = request.POST.get('searched')
+        venues = Product.objects.filter(name__icontains=searched)
+        return render(request,
+                      'search_product/search_product.html', {'searched': searched, 'venues': venues})
+    else:
+        return render(request,
+                      'search_product/search_product.html', {})

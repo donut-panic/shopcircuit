@@ -2,7 +2,7 @@ from django.template.defaulttags import url
 from django.urls import path
 
 from store.views import StoreMainView, StoreCategoryView, ProductView, AddProductToCartView, CartView, \
-    DeleteFromCartView, IncreaseQuantityInCart, DecreaseQuantityInCart, LeStoreCategoryView
+    DeleteFromCartView, IncreaseQuantityInCart, DecreaseQuantityInCart, LeStoreCategoryView, search_venues
 
 app_name = "store"
 
@@ -16,5 +16,5 @@ urlpatterns = [
     path("cart/delete/<pk>", DeleteFromCartView.as_view(), name="delete_from_cart_view"),
     path("cart/increase/<pk>", IncreaseQuantityInCart.as_view(), name="increase_quantity_in_cart_view"),
     path("cart/decrease/<pk>", DecreaseQuantityInCart.as_view(), name="decrease_quantity_in_cart_view"),
-
+    path('search/venues', search_venues, name='search_venues')
 ]

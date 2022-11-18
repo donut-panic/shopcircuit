@@ -7,18 +7,21 @@
           <img src="{% static 'shopcircuit.svg' %}" alt="ShopCircuit">
             </a>
         </div>
-        <div class="nav__search">
+        <form class="nav__search" method=POST action=" {% url 'store:search_venues' %} ">
+          {% csrf_token %}
           <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for products">
-              <button class="btn btn-outline-primary" type="button" id="button-addon2">Search</button>
+              <input type="Search" class="form-control" placeholder="Search for products" name="searched">
+              <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
           </div>
-        </div>
+        </form>
         <div class="nav__icons-area">
           <div class="nav__icon">
             {% if picture_profile %}
             <a href="{% url 'login' %}" class="nav__link">
-              <img src="{{picture_profile.url }}" class="avatar" style="width:50px;height:50px;">
-<!--              <span class="nav__icon-text">Login</span>-->
+              <img src="{{picture_profile.url }}" class="profile__image">
+              </a>
+            <a href="{% url 'logout' %}">
+              <span class="nav__icon-text">Logout</span>
             </a>
             {% else %}
             <a href="{% url 'login' %}" class="nav__link">

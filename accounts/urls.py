@@ -41,6 +41,6 @@ urlpatterns = [
     name='password_reset_complete'),
     path('profile/<int:pk>', ProfileDetailsView.as_view(), name='profile_view'),
     path('profile/<int:pk>/update', ProfileUpdateView.as_view(), name='update_view'),
-    path('profile/home', home)
+    path('profile/home', home, name='home')
 
 ]
