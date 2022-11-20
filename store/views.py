@@ -135,7 +135,7 @@ class SearchView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = Product.objects.select_related("category", "subcategory").all()
         keywords = self.request.GET.get("keywords")
         category_id = self.request.GET.get("category_id")
         if category_id != "":

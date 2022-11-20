@@ -493,3 +493,29 @@ git bra}
     color: #9da1a7;
     margin-bottom: 10px;
 }
+
+.search__details-link {
+    color: #9da1a7;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.search__details-link:hover {
+    color: #212529;
+}
+
+.search__not-found {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search__glass {
+    width: 120px;
+    margin-right: 50px;
+}
+
+.search__not-found-header {
+    color: #9da1a7;
+    font-size: 2em;
+}
