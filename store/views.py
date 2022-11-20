@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, ListView
 
 from store.models import Product, Category, UnitOrder, LeCategory
 
@@ -123,7 +123,25 @@ def search_venues(request):
         searched = request.POST.get('searched')
         venues = Product.objects.filter(name__icontains=searched)
         return render(request,
-                      'search_product/search_product.html', {'searched': searched, 'venues': venues})
+                      'search_product/search_view.html', {'searched': searched, 'venues': venues})
     else:
         return render(request,
-                      'search_product/search_product.html', {})
+                      'search_product/search_view.html', {})
+
+
+class SearchView(ListView):
+    template_name = "search_product/search_view.html"
+    model = Product
+    paginate_by = 20
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        keywords = self.request.GET.get("keywords")
+        category_id = self.request.GET.get("category_id")
+        if category_id != "":
+            queryset = queryset.filter(category=int(category_id))
+        if len(keywords) > 0:
+            queryset = queryset.filter(name__icontains=keywords)
+        else:
+            queryset = queryset.none()
+        return queryset

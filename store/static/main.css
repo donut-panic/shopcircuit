@@ -119,6 +119,12 @@
     font-size: .8em;
 }
 
+.nav__search-select-input {
+    border: 1px solid #ced4da;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 /* CATEGORIES */
 .categories {
     background: #fff;
@@ -295,7 +301,7 @@
     border: 1px solid rgba(81,88,94,.12);
     box-shadow: 0 0.05rem 0.2rem rgb(0 0 0 / 3%);
     border-radius: 0.35rem;
-}
+git bra}
 
 
 .cart__image-link {
@@ -398,12 +404,92 @@
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
-/* Search */
+/* SEARCHING */
 
-.search__image_sad {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    max-width: 12%;
-    height: auto
+.search__item {
+    display: flex;
+    align-items: stretch;
+    box-shadow: 0 1px 2px rgb(51 51 51 / 7%);
+    border-radius: .35rem;
+    border: 1px solid rgba(81,88,94,.12);
+    transition: .2s;
+    background: #fff;
+    margin-bottom: 30px;
+    transition: .2s;
+    position: relative;
+}
+
+.search__item:hover {
+    box-shadow: 0 3px 10px rgb(51 51 51 / 10%);
+}
+
+.search__photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 200px;
+    border-right: 1px solid rgba(81,88,94,.12);
+}
+
+.search__add-to-wishlist {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.search__add-to-wishlist-button {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: .35rem;
+    border: 1px solid #dee2e6;
+    transition: .2s;
+    line-height: 40px;
+    text-align: center;
+    color: #6c757d;
+}
+
+.search__add-to-wishlist-button:hover {
+    border-color: #0d6efd;
+    background-color: #f9fafb;
+}
+
+.search__image {
+    display: block;
+    height: 160px;
+    width: 160px;
+}
+
+.search__name {
+    margin-bottom: 5px;
+}
+
+.search__name-link {
+    color: #212529;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.search__price {
+    color: #212529;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.search__details {
+    margin-bottom: 5px;
+}
+
+.search__info {
+    padding: 20px 50px 20px 20px;
+}
+
+.search__description {
+    color: #9da1a7;
+    margin-bottom: 10px;
 }
