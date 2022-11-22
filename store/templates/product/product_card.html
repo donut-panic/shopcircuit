@@ -1,0 +1,36 @@
+{% load static %}
+
+<div class="product-card">
+    <div class="product-card__image-area">
+        {% if product.image %}
+        <a href="{% url 'store:product_view' product.id %}"><img src={{ product.image.url }} class="product-card__image"></a>
+        {% else %}
+        <a href="{% url 'store:product_view' product.id %}"><img src="{% static 'placeholder.jpg' %}" class="product-card__image"></a>
+        {% endif %}
+    </div>
+    <div class="product-card__data">
+        <p class="product-card__price">${{ product.price }}</p>
+        <a href="{% url 'store:product_view' product.id %}" class="product-card__name">{{ product.name }}</a>
+    </div>
+    <div class="product-card__buttons">
+        {% if product.quantity > 0 %}
+            <a href="{% url 'store:add_product_to_cart_view' product.id %}" class="btn btn-primary me-2 add-to-cart-button" data-cart-id="{{ product.id }}"><i class="bi bi-cart-plus-fill"></i> Add to cart</a>
+        {% else %}
+            <a href="#" class="btn btn-secondary me-2 disabled"><i class="bi bi-cart-plus-fill"></i> Add to cart</a>
+        {% endif %}
+        <a href="#" class="btn btn-outline-secondary"><i class="bi bi-heart-fill"></i></a>
+        <span class="product-card__availability">
+        </span>
+    </div>
+    <div class="product-card__availability">Availability:
+        {% if product.quantity == 0 %}
+            Not available
+        {% elif product.quantity < 10 %}
+            Last items
+        {% elif product.quantity >= 10 and product.quantity <= 100 %}
+            Good
+        {% elif product.quantity >= 100 %}
+            Very good
+        {% endif %}
+    </div>
+</div>

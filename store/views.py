@@ -1,12 +1,28 @@
+from random import sample
+
 from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import TemplateView, DetailView, ListView
+from django.views.generic import DetailView, ListView
 
 from store.models import Product, Category, UnitOrder, LeCategory
 
 
-class StoreMainView(TemplateView):
-    template_name = "base.html"
+class StoreMainView(View):
+    def get(self, request):
+        random_categories = sample(list(Category.objects.all()), 4)
+        context = []
+        for i in random_categories:
+            context.append({
+                "name": i.name,
+                "products": Product.objects.filter(category=i.id)[:4]
+            })
+        return render(
+            request,
+            template_name="main/store_main_view.html",
+            context={
+                "random_categories": context
+            }
+        )
 
 
 class StoreCategoryView(View):

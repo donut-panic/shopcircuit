@@ -519,3 +519,42 @@ git bra}
     color: #9da1a7;
     font-size: 2em;
 }
+
+/* HERO */
+
+.hero {
+    display: flex;
+}
+
+.hero__header {
+    font-size: 3.4em;
+}
+
+.hero__subheader {
+    color: #51585e;
+    font-size: 1.25em;
+    font-weight: normal;
+}
+
+.hero__image {
+    height: 360px;
+    width: 460px;
+    background-color: lightgrey;
+}
+
+.hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+.hero__img {
+    height: 360px;
+    width: 460px;
+}
+
+.hero__content {
+    padding-left: 100px;
+    flex-grow: 1;
+}

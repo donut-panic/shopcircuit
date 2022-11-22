@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="white-container">
+    <div class="container mb-5 pb-5">
+        <div class="hero">
+            <div class="hero__image">
+<!--                <img src="" alt="" class="hero__img">-->
+            </div>
+            <div class="hero__content">
+                <h1 class="hero__header mb-2">Laptops<br>& computers </h1>
+                <h5 class="hero__subheader mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Visit category</a>
+            </div>
+        </div>
+    </div>
+    <!-- PRODUCTS -->
+    {% for category in random_categories %}
+    <div class="container mb-5">
+        <div class="row">
+            <h2 class="mb-5">{{ category.name }}</h2>
+        </div>
+        <div class="row">
+            {% for product in category.products %}
+                <div class="col-3">
+                    {% include '../product/product_card.html' %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{%endblock %}
