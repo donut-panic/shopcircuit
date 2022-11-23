@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'accounts',
     'widget_tweaks',
     'smart_selects',
+    'checkout',
 ]
 
 MIDDLEWARE = [

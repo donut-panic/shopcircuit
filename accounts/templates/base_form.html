@@ -19,7 +19,6 @@
   {% for field in form.visible_fields %}
     <div class="form-group">
       {{ field.label_tag }}
-
       {% if form.is_bound %}
         {% if field.errors %}
           {% render_field field class="form-control is-invalid" %}

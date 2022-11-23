@@ -17,7 +17,7 @@
         <div class="nav__icons-area">
           <div class="nav__icon">
             {% if picture_profile %}
-            <a href="{% url 'login' %}" class="nav__link">
+            <a href="{% url 'home' %}" class="nav__link">
               <img src="{{picture_profile.url }}" class="profile__image">
               </a>
             <a href="{% url 'logout' %}">
@@ -48,12 +48,30 @@
   </nav>
 
   <!-- CATEGORIES -->
-  <nav class="categories">
-    <div class="container">
-      <ul class="categories__ul">
+<nav class="navbar navbar-expand-lg " style="background-color: #e3f2fd;">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'store:store_main_view' %}">HOME</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
         {% for category in categories %}
-          <li class="categories__item"><a href="{% url 'store:category_view' category.id %}" class="categories__link">{{ category.name }}</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{category}}
+          </a>
+          <ul class="dropdown-menu">
+            {% for sub in subclasses %}
+          {% if sub.category_id.pk == category.id %}
+            <li><a class="dropdown-item" href="{% url 'store:leproduct_view' sub.id %}">{{sub.name}}</a></li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </li>
         {% endfor %}
       </ul>
     </div>
-  </nav>
+  </div>
+</nav>
+
