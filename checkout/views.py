@@ -1,22 +1,35 @@
-from django.http import request
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views import View
 from django.views.generic import CreateView
-
 from checkout.forms import AddOrderInfoForm
-from store.models import Product
-from store.views import CartView
 
 
 # Create your views here.
-
+def fourth_form_submission(request):
+    form = AddOrderInfoForm(request.POST)
+    if form.is_valid():
+        data = form.cleaned_data
+        # save data to DB from session
+        try:
+            del request.session['cart']
+        except KeyError:
+            pass
+    return HttpResponse("Data has been saved.")
 
 
 class OrderView(CreateView):
     template_name = 'order/order_view.html'
     form_class = AddOrderInfoForm
     success_url = reverse_lazy('store:store_main_view')
+    def post(self, request, *args, **kwargs):
+        if self.success_url:
+            try:
+                del request.session['cart']
+            except KeyError:
+                pass
+        return redirect('/store')
+
 
 
 
