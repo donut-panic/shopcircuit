@@ -73,7 +73,7 @@ class Order(models.Model):
     order_by = ForeignKey(User, on_delete=DO_NOTHING)
     ForeignKey(OrderStatus, on_delete=DO_NOTHING)
     created = DateTimeField(default=datetime.now, verbose_name='Beginning of purchase')
-    address_street = CharField(max_length=256, verbose_name='Adress Street (please provide full name)')
+    address_street = CharField(max_length=256, verbose_name='')
     address_postal_code = CharField(max_length=18)
     address_city = CharField(max_length=128, verbose_name='City name')
     shipping = ForeignKey(ShippingMethod, on_delete=DO_NOTHING)
@@ -81,7 +81,7 @@ class Order(models.Model):
     payment_method = ForeignKey(PaymentMethod, on_delete=DO_NOTHING)
 
     def __str__(self):
-        return self.id
+        return f'{self.id}'
 
 
 class UnitOrder(models.Model):
@@ -90,4 +90,4 @@ class UnitOrder(models.Model):
     quantity = IntegerField(null=False)
     price = models.DecimalField(max_digits=12, decimal_places=2)
     def __str__(self):
-        return self.id
+        return f'{self.id}'

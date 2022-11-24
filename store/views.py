@@ -80,6 +80,8 @@ class CartView(View):
                 })
                 overall_price += total_price
                 overall_tax += tax
+
+
         return render(
             request,
             template_name="cart/cart_view.html",

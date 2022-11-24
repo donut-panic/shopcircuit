@@ -31,7 +31,7 @@
           {% endif %}
           </div>
           <div class="nav__icon ms-5">
-            <a href="{% url 'store:cart_view' %}" class="nav__link">
+              <a href="{% url 'store:cart_view' %}" class="nav__link">
               <i class="bi bi-cart-fill nav__icon-font"></i>
               <span class="nav__icon-text">My cart ({{ cart_items_number }})</span>
             </a>
@@ -48,9 +48,9 @@
   </nav>
 
   <!-- CATEGORIES -->
-<nav class="navbar navbar-expand-lg " style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-lg " style="background-color: #a478eb;">
   <div class="container">
-    <a class="navbar-brand" href="{% url 'store:store_main_view' %}">HOME</a>
+    <a class="navbar-brand p-2" href="{% url 'store:store_main_view' %}">HOME</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -58,9 +58,9 @@
       <ul class="navbar-nav">
         {% for category in categories %}
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="dropdown-list mx-3 py-2"  data-bs-hover="dropdown" aria-expanded="false">
             {{category}}
-          </a>
+          </div>
           <ul class="dropdown-menu">
             {% for sub in subclasses %}
           {% if sub.category_id.pk == category.id %}
