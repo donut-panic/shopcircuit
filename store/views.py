@@ -57,7 +57,10 @@ class ProductView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        print(context)
         context["orders"] = UnitOrder.objects.filter(product_id=self.get_object()).count()
+        context["category"] = Category.objects.get(id=self.get_object().category.id)
+        context["subcategory"] = LeCategory.objects.get(id=self.get_object().subcategory.id)
         return context
 
 
