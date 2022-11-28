@@ -13,6 +13,7 @@
 /* PRODUCT CARD */
 
 .product-card {
+    position: relative;
     box-shadow: 0 1px 2px rgb(51 51 51 / 7%);
     border-radius: .35rem;
     border: 1px solid rgba(81,88,94,.12);
@@ -72,6 +73,33 @@
     color: #ccc;
 }
 
+.product-card__add-to-wishlist {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+.product-card__add-to-wishlist-button {
+    display: block;
+    width: 34px;
+    height: 34px;
+    background-color: #fff;
+    border-radius: .35rem;
+    border: 1px solid #dee2e6;
+    transition: .2s;
+    line-height: 34px;
+    text-align: center;
+    color: #6c757d;
+    font-size: 1em;
+}
+
+.search__add-to-wishlist-button:hover {
+    border-color: #0d6efd;
+    background-color: #f9fafb;
+}
+
 /* NAV MENU */
 .nav {
     background: #fff;
@@ -117,6 +145,12 @@
 
 .nav__icon-text {
     font-size: .8em;
+}
+
+.nav__search-select-input {
+    border: 1px solid #ced4da;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 /* CATEGORIES */
@@ -295,7 +329,7 @@
     border: 1px solid rgba(81,88,94,.12);
     box-shadow: 0 0.05rem 0.2rem rgb(0 0 0 / 3%);
     border-radius: 0.35rem;
-}
+git bra}
 
 
 .cart__image-link {
@@ -383,7 +417,6 @@
 }
 
 .cart__price-part {
-
 }
 
 /* Profile */
@@ -399,7 +432,6 @@
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
-/* Search */
 .search__image_sad {
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -426,4 +458,176 @@
 }
 }
 
+/* SEARCHING */
 
+.search__item {
+    display: flex;
+    align-items: stretch;
+    box-shadow: 0 1px 2px rgb(51 51 51 / 7%);
+    border-radius: .35rem;
+    border: 1px solid rgba(81,88,94,.12);
+    transition: .2s;
+    background: #fff;
+    margin-bottom: 30px;
+    transition: .2s;
+    position: relative;
+}
+
+.search__item:hover {
+    box-shadow: 0 3px 10px rgb(51 51 51 / 10%);
+}
+
+.search__photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 200px;
+    border-right: 1px solid rgba(81,88,94,.12);
+}
+
+.search__add-to-wishlist {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.search__add-to-wishlist-button {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: .35rem;
+    border: 1px solid #dee2e6;
+    transition: .2s;
+    line-height: 40px;
+    text-align: center;
+    color: #6c757d;
+}
+
+.search__add-to-wishlist-button:hover {
+    border-color: #0d6efd;
+    background-color: #f9fafb;
+}
+
+.search__image {
+    display: block;
+    height: 160px;
+    width: 160px;
+}
+
+.search__name {
+    margin-bottom: 5px;
+}
+
+.search__name-link {
+    color: #212529;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.search__price {
+    color: #212529;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.search__details {
+    margin-bottom: 5px;
+}
+
+.search__info {
+    padding: 20px 50px 20px 20px;
+}
+
+.search__description {
+    color: #9da1a7;
+    margin-bottom: 10px;
+}
+
+.search__details-link {
+    color: #9da1a7;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.search__details-link:hover {
+    color: #212529;
+}
+
+.search__not-found {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search__glass {
+    width: 120px;
+    margin-right: 50px;
+}
+
+.search__not-found-header {
+    color: #9da1a7;
+    font-size: 2em;
+}
+
+/* HERO */
+
+.hero {
+    display: flex;
+}
+
+.hero__header {
+    font-size: 3.4em;
+}
+
+.hero__subheader {
+    color: #51585e;
+    font-size: 1.25em;
+    font-weight: normal;
+}
+
+.hero__image {
+    height: 360px;
+    width: 460px;
+    background-color: lightgrey;
+}
+
+.hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+.hero__img {
+    height: 360px;
+    width: 460px;
+}
+
+.hero__content {
+    padding-left: 100px;
+    flex-grow: 1;
+}
+
+/* BREADCRUMBS */
+.breadcrumbs__link {
+    text-decoration: none;
+    transition: .2s;
+    color: #9da1a7;
+}
+
+.breadcrumbs__link:hover {
+    color: rgba(33,37,41,.7);
+}
+
+/* EMPTY CATEGORY */
+
+.empty-category {
+    font-size: 1.2em;
+    text-align: center;
+    color: #9da1a7;
+}

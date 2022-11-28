@@ -3,11 +3,16 @@
 
 {% block content %}
 <div class="white-container">
+    <div class="container mb-5">
+        <div class="breadcrumbs">
+            <a href="{% url 'store:category_view' category.id %}" class="breadcrumbs__link">{{ category.name }}</a> » <a href="{% url 'store:leproduct_view' subcategory.id %}" class="breadcrumbs__link">{{ subcategory.name }}</a> » <span class="breadcrumbs__link">{{ product.name }}</span>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-5">
                 <div class="product-image">
-                    <img src="{% static 'placeholder.jpg' %}" class="product-image__image">
+                    <img src="{{ product.image.url }}" class="product-image__image">
                 </div>
             </div>
             <div class="col-7">
@@ -43,7 +48,7 @@
                     </div>
                     <div>
                         {% if product.quantity > 1 %}
-                            <a href="#" class="btn btn-primary me-2"><i class="bi bi-cart3"></i> Add to cart</a>
+                            <a href="{% url 'store:add_product_to_cart_view' product.id %}" class="btn btn-primary me-2"><i class="bi bi-cart3"></i> Add to cart</a>
                         {% else %}
                             <a href="#" class="btn btn-secondary me-2 disabled"><i class="bi bi-cart3"></i> Add to cart</a>
                         {% endif %}
