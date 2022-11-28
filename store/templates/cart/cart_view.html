@@ -50,7 +50,7 @@
                             <div class="cart__sidebar-tax">${{ overall_tax|floatformat:2 }}</div>
                         </div>
                         <div class="cart__sidebar-buttons">
-                            <a href="#" class="btn btn-primary cart__checkout-button">Checkout</a>
+                            <a href="{% url 'order_view' %}" class="btn btn-primary cart__checkout-button">Checkout</a>
                         </div>
                     </div>
                 </div>

@@ -44,7 +44,7 @@
                         <h5>${{ product.price }}</h5>
                     </div>
                     <div class="product-info__description mb-3">
-                        <p>{{ product.description }}</p>
+                        <p>{{ product.description|safe }}</p>
                     </div>
                     <div>
                         {% if product.quantity > 1 %}

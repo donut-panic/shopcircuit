@@ -1,0 +1,41 @@
+
+{% load static %}
+<div class="col-5">
+    {% for product in sidepanel_products %}
+        <div class="cart__products">
+            <div class="cart__product mb-3">
+                <div class="cart__product-area">
+                    <div class="cart__image-link">
+                        <a href="{% url 'store:product_view' product.product.id %}"><img src="{{ sidepanel_product.image.url }}" class="cart__image me-3"></a>
+                    </div>
+                    <div class="cart__description">
+                        <div>
+                            <a href="{% url 'store:product_view' product.product.id %}" class="cart__product-link">{{ product.product.name }}</a>
+                        </div>
+                        <div>
+                            <a href="{% url 'store:category_view' product.product.category.id %}" class="cart__product-category">{{ product.product.category.name }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart__quantity">
+                    <input type="text" class="cart__input" placeholder="{{ product.quantity }}" readonly>
+                     <div class="cart__price"><div class="cart__price-part">${{ product.total_price }}</div><div class="cart__percent-part">(VAT: {% widthratio product.product.tax 1 100 %}%)</div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+            <div class="cart__sidebar">
+                <div class="cart__total-price mb-3">
+                    <div>Total price</div>
+                    <div class="cart__sidebar-price">${{ sidepanel_overall_price }}</div>
+                </div>
+                <div class="cart__total-tax pb-4 mb-4">
+                    <div>TAX</div>
+                    <div class="cart__sidebar-tax">${{ sidepanel_overall_tax|floatformat:2 }}</div>
+                </div>
+
+                    <a href="{% url 'store:cart_view' %}" class="btn btn-primary col-12 center" style="background-color:#8742f5; ">Back to cart</a>
+
+            </div>
+        </div>

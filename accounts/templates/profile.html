@@ -11,7 +11,7 @@
         {% endif %}
         <h2>User Name: <br>{{ profile.user.username }}</h2>
         <p><b>Gender:</b> <span class="text-secondary" >{{ profile.gender|default:"Not specified" }}</span></p>
-    <a href= "{{profile.user.id}}/update">Update your data here</a>
+    <a href= "{{user.profile.id}}/update">Update your data here</a>
         </div>
         <div class="col">
     <div class="list-group list-inline" id="speciesList">

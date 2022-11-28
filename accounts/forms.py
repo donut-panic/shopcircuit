@@ -1,10 +1,8 @@
 import django.forms
 from django.contrib.auth.forms import UserCreationForm, UsernameField, AuthenticationForm
-from django.forms import ChoiceField, CharField, ModelForm, Textarea, EmailField, PasswordInput, BooleanField, \
-    CheckboxInput
+from django.forms import ChoiceField, CharField, ModelForm,  EmailField, BooleanField, CheckboxInput
 from tinymce import widgets
 from tinymce.widgets import TinyMCE
-
 from accounts.models import Profile
 
 
@@ -26,6 +24,10 @@ class SignUpForm(UserCreationForm):
 
 
 class UserProfileUpdateForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['user'].disabled = True
 
     GENDER_CHOICES = [
         ('male', 'Male'),

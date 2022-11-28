@@ -9,7 +9,6 @@ GENDER = (('male' , 'Male'),
 
 class Profile(Model):
 
-
     user = OneToOneField(User, on_delete=CASCADE)
     image = ImageField(upload_to='accounts/static/images', blank=True, null=True)
     gender = CharField(max_length=6, choices=GENDER, default='Male', blank=True)

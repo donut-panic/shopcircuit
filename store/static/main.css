@@ -432,6 +432,32 @@ git bra}
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
+.search__image_sad {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    max-width: 12%;
+    height: auto
+}
+
+/* hoover-navbar */
+@media (min-width: 100px) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
+
+    }
+    .navbar a:hover, .dropdown:hover {
+    background-color: #9f26eb;
+    -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+
+}
+}
+
 /* SEARCHING */
 
 .search__item {

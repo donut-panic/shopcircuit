@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'accounts',
     'widget_tweaks',
     'smart_selects',
+    'checkout',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +77,7 @@ TEMPLATES = [
                 'accounts.contex_processors.profile_pic',
                 'store.context_processors.get_categories',
                 'store.context_processors.get_number_of_items_in_cart',
+                'checkout.context_processor.sidepanel',
             ],
         },
     },
