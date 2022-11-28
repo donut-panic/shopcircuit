@@ -1,12 +1,28 @@
+from random import sample
+
 from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import DetailView, ListView
 
 from store.models import Product, Category, UnitOrder, LeCategory
 
 
-class StoreMainView(TemplateView):
-    template_name = "base.html"
+class StoreMainView(View):
+    def get(self, request):
+        random_categories = sample(list(Category.objects.all()), 4)
+        context = []
+        for i in random_categories:
+            context.append({
+                "name": i.name,
+                "products": Product.objects.filter(category=i.id)[:4]
+            })
+        return render(
+            request,
+            template_name="main/store_main_view.html",
+            context={
+                "random_categories": context
+            }
+        )
 
 
 class StoreCategoryView(View):
@@ -41,7 +57,10 @@ class ProductView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        print(context)
         context["orders"] = UnitOrder.objects.filter(product_id=self.get_object()).count()
+        context["category"] = Category.objects.get(id=self.get_object().category.id)
+        context["subcategory"] = LeCategory.objects.get(id=self.get_object().subcategory.id)
         return context
 
 
@@ -123,7 +142,25 @@ def search_venues(request):
         searched = request.POST.get('searched')
         venues = Product.objects.filter(name__icontains=searched)
         return render(request,
-                      'search_product/search_product.html', {'searched': searched, 'venues': venues})
+                      'search_product/search_view.html', {'searched': searched, 'venues': venues})
     else:
         return render(request,
-                      'search_product/search_product.html', {})
+                      'search_product/search_view.html', {})
+
+
+class SearchView(ListView):
+    template_name = "search_product/search_view.html"
+    model = Product
+    paginate_by = 20
+
+    def get_queryset(self):
+        queryset = Product.objects.select_related("category", "subcategory").all()
+        keywords = self.request.GET.get("keywords")
+        category_id = self.request.GET.get("category_id")
+        if category_id != "":
+            queryset = queryset.filter(category=int(category_id))
+        if len(keywords) > 0:
+            queryset = queryset.filter(name__icontains=keywords)
+        else:
+            queryset = queryset.none()
+        return queryset

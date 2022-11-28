@@ -7,10 +7,15 @@
           <img src="{% static 'shopcircuit.svg' %}" alt="ShopCircuit">
             </a>
         </div>
-        <form class="nav__search" method=POST action=" {% url 'store:search_venues' %} ">
-          {% csrf_token %}
+        <form class="nav__search" method="GET" action="{% url 'store:search_products' %}">
           <div class="input-group">
-              <input type="Search" class="form-control" placeholder="Search for products" name="searched">
+              <input type="Search" class="form-control" placeholder="Search for products" name="keywords">
+              <select class="form-select" name="category_id">
+                <option value="">All categories</option>
+                {% for category in categories %}
+                  <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+              </select>
               <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
           </div>
         </form>
