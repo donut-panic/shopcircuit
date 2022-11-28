@@ -77,8 +77,7 @@ class Order(models.Model):
     address_postal_code = CharField(max_length=18)
     address_city = CharField(max_length=128, verbose_name='City name')
     shipping = ForeignKey(ShippingMethod, on_delete=DO_NOTHING)
-    payment = DecimalField(max_digits=12, decimal_places=2, null=False)
-    payment_method = ForeignKey(PaymentMethod, on_delete=DO_NOTHING)
+    payment_method = ForeignKey(PaymentMethod, on_delete=DO_NOTHING, default=1)
 
     def __str__(self):
         return f'{self.id}'

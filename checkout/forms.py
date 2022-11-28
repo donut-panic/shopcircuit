@@ -6,8 +6,8 @@ class AddOrderInfoForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.fields['order_by'].disabled = True
-        # self.fields['created'].disabled = True
+        self.fields['order_by'].disabled = True
+        self.fields['created'].disabled = True
 
 
     class Meta:
@@ -15,7 +15,7 @@ class AddOrderInfoForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {'order_by': forms.Select(attrs={'class': 'form-control text-center bg-white'}),
-                   'created': forms.DateTimeInput(attrs={'class': 'form-control text-center bg-white'}, format='%m/%d/%y'),
+                   'created': forms.DateTimeInput(attrs={'class': 'form-control text-center bg-white'}, format='%d/%m/%y'),
                    'address_street': forms.Textarea(attrs={'class': 'form-control', 'placeholder':
                        'Please eneter your full adress here', 'rows': 2}),
                    'address_postal_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder':

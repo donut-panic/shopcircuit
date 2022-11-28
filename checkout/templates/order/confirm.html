@@ -4,20 +4,19 @@
 <div class="container  col-lg my-5">
     <div class="row">
      <div class="col-7">
-<form method="post">
-    {% csrf_token %}
 <!--        main panel-->
     <div class="container border rounded p-3">
     <div class="form row">
+        {%for confirm in confirms%}
     <div class="col-md-6">
-    {{ form.order_by.errors }}
-    {{ form.order_by.label_tag }}
-    {{ form.order_by }}
+    {{ confirm.order_by.errors }}
+    {{ confirm.order_by.label_tag }}
+        <div class="form-control"> {{ confirm.order_by }}</div>
       </div>
     <div class="col-md-6">
-    {{ form.created.errors }}
-    {{ form.created.label_tag }}
-    {{ form.created }}
+    {{ confirm.created.errors }}
+    {{ confirm.created.label_tag }}
+    <div class="form-control">{{ confirm.created }}</div>
       </div>
     </div>
     </div>
@@ -26,41 +25,41 @@
     <h2>Please provide your shipping and payment infomations.</h2>
     <div class="form row">
          <div class="col-md-3">
-    {{ form.shipping.errors }}
-    {{ form.shipping.label_tag }}
-    {{ form.shipping }}
+    {{ confirm.shipping.errors }}
+    {{ confirm.shipping.label_tag }}
+    <div class="form-control">{{ confirm.shipping }}</div>
          </div>
 
 
     </div>
         <div class="form my-3">
-    {{ form.payment_method.errors }}
-    {{ form.payment_method.label_tag }}
-    {{ form.payment_method }}
+    {{ confirm.payment_method.errors }}
+    {{ confirm.payment_method.label_tag }}
+    <div class="form-control">{{ confirm.payment_method }}</div>
          </div>
             </div>
     <hr>
      <div class="container border rounded p-3">
     <h2>Please provide your address.</h2>
     <div class="form-group">
-    {{ form.address_street.errors }}
-    {{ form.address_street.label_tag }}
-    {{ form.address_street }}
+    {{ confirm.address_street.errors }}
+    {{ confirm.address_street.label_tag }}
+   <div class="form-control"> {{ confirm.address_street }}</div>
   </div>
     <div class="form row">
          <div class="col-md-3">
-    {{ form.address_city.errors }}
-    {{ form.address_city.label_tag }}
-    {{ form.address_city }}
+    {{ confirm.address_city.errors }}
+    {{ confirm.address_city.label_tag }}
+    <div class="form-control">{{ confirm.address_city }} </div>
          </div>
          <div class="col-md-3">
-    {{ form.address_postal_code.errors }}
-    {{ form.address_postal_code.label_tag }}
-    {{ form.address_postal_code }}
+    {{ confirm.address_postal_code.errors }}
+    {{ confirm.address_postal_code.label_tag }}
+    <div class="form-control">{{ confirm.address_postal_code }}</div>
          </div>
   </div>
+         {%endfor%}
             <input type="submit" value="Submit" class="btn btn-lg col-12 my-3 btn-primary" >
-</form>
      </div>
     </div>
     {% include 'sidepanel/sidepanel.html' %}
