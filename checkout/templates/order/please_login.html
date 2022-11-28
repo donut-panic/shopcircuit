@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+<h1>Curently you are not logged to our store</h1>
+<h3>To continue you have to log in</h3>
+<a href="{% url 'login'%}">Login </a>
+<h3>You don't have an account? </h3>
+<a href="{% url 'sign_up'%}">Register yor account here! </a>
+
+
+{% endblock %}

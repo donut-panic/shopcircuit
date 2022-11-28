@@ -27,6 +27,11 @@ class OrderView(CreateView):
         return HttpResponseRedirect(self.success_url)
 
 
+class PleaseLoginView(View):
+    def get(self,request):
+        return render(request, template_name='order/please_login.html',)
+
+
 
 class ConfirmView(View):
     def get(self, request):
