@@ -43,11 +43,10 @@ class LeStoreCategoryView(View):
     def get(self, request, pk):
         return render(
             request,
-            template_name='subcategory/subcategory_view.html',
+            template_name="category/category_view.html",
             context={
                 "products_list": Product.objects.filter(subcategory_id=pk),
-                "lecategory": LeCategory.objects.get(id=pk),
-                "lecategories_list": LeCategory.objects.filter(category_id_id=pk),
+                "category": LeCategory.objects.get(id=pk),
             }
         )
 
