@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+<h3 class="h1 text-center text-primary my-5 col-lg"> Welcome to our shop ! <br>Please Login</h3>
+<form method="post" class="container mb-5 col-lg-5">
+  {% csrf_token %}
+{% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+  {% endfor %}
+  {% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+      {% for error in form.non_field_errors %}
+        {{ error }}
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% for field in form.visible_fields|slice:2 %}
+    <div class="form-group">
+      {{ field.label_tag }}
+        {% render_field field class="form-control" %}
+      {% if field.help_text %}
+        <small class="form-text text-muted">{{ field.help_text }}</small>
+      {% endif %}
+    </div>
+  {% endfor %}
+  <div class="row mb-4">
+    <div class="col d-flex justify-content-center">
+      <div class="form-check">
+        {% render_field form.remember_me class="form-check-input" id='remember_me' %}
+        {% render_field form.remember_me.label  %}
+
+      </div>
+    </div>
+    <div class="col">
+    <a href= "{% url 'password_reset' %}" style="text-decoration:none">Forgot password?</a>
+    </div>
+    <div class="col">
+    <a href= "{% url 'sign_up' %}" style="text-decoration:none">Sign Up Here</a>
+    </div>
+  </div>
+  <div class="text text-center col">
+  <input type="submit" value="Submit" class="btn btn-primary btn-block col-6 mb-4">
+</div>
+
+</form>
+{% endblock %}

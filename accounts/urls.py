@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView, PasswordChangeView, PasswordChangeDoneView, \
     PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
-from django.urls import path
+from django.urls import path, reverse_lazy
 
 from accounts.views import SignUpView, ProfileUpdateView, ProfileDetailsView, UpdatedLoginView, home
 
@@ -41,6 +41,7 @@ urlpatterns = [
     name='password_reset_complete'),
     path('profile/<int:pk>', ProfileDetailsView.as_view(), name='profile_view'),
     path('profile/<int:pk>/update', ProfileUpdateView.as_view(), name='update_view'),
-    path('profile/home', home, name='home')
+    path('home/', home, name='home'),
+    path('login/', ProfileDetailsView.as_view(), name='login_acc')
 
 ]

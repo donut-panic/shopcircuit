@@ -17,7 +17,7 @@
       <th scope="col">#</th>
       <th scope="col">Product</th>
       <th scope="col">Quantity</th>
-      <th scope="col">Price <small class="text-muted">(with tax)</small></th>
+      <th scope="col">Price <sub class="text-muted">(with tax)</sub></th>
     </tr>
   </thead>
 {% endif %}
@@ -26,13 +26,13 @@
       <th scope="row">{{forloop.counter}}</th>
       <td>{{unit.product_id}}</td>
       <td>{{unit.quantity}}</td>
-      <td>{{unit.price}}</td>
+      <td>{{unit.price}} $</td>
     </tr>
 {% endfor %}
         </tbody>
 </table>
         <hr>
-    <span class="h3">Total price </h3><span class="text-muted h6">(with tax)</span>: {{total_price}}
+    <sub class="h3">Total price </h3><sub class="text-muted h6">(with tax) </sub>: {{total_price}} $
 </span>
         </div>
 <div class="col-6">

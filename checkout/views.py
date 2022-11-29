@@ -1,14 +1,31 @@
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView
+
+from accounts.forms import LoginForm
 from checkout.forms import AddOrderInfoForm
 from store.models import Order, UnitOrder, Product
 
 
 # Create your views here.
 
+
+class CheckoutLoginView(LoginView):
+    form_class = LoginForm
+    template_name = 'order/login_checkout.html'
+    success_url = 'order/order_view.html'
+    def form_valid(self, form):
+        remember_me = form.cleaned_data['remember_me']
+        if not remember_me:
+            self.request.session.set_expiry(0)  # if remember me is
+            self.request.session.modified = True
+        return super(CheckoutLoginView, self).form_valid(form)
+
+    def get_success_url(self):
+        return '/checkout/order/'
 
 class OrderView(CreateView):
     template_name = 'order/order_view.html'

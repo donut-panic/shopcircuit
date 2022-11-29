@@ -98,7 +98,7 @@ DATABASES = {
 
 TINYMCE_DEFAULT_CONFIG = {
     "height": "500",
-    "width": "800",
+    "width": "1296",
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 20,
     'selector': 'textarea',
@@ -116,9 +116,13 @@ TINYMCE_DEFAULT_CONFIG = {
             fontsizeselect  | forecolor backcolor | alignleft alignright |
             aligncenter alignjustify | indent outdent | bullist numlist table |
             | link image media | codesample |
-            visualblocks visualchars | emoticons
-            charmap hr pagebreak nonbreaking anchor |  code | superscript | subscript |
+            visualblocks visualchars | emoticons |
             ''',
+    'toolbar2': """
+            charmap hr pagebreak nonbreaking anchor |  code | superscript | subscript |
+    
+    """,
+
     'contextmenu': 'formats | link image',
     'menubar': True,
     'statusbar': True,
@@ -174,6 +178,6 @@ MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
 
-LOGIN_REDIRECT_URL = '/accounts/profile/home'
+
 
 
