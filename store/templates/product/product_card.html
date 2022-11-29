@@ -33,6 +33,10 @@
         {% endif %}
     </div>
     <div class="product-card__add-to-wishlist">
-        <a href="#" class="product-card__add-to-wishlist-button"><i class="bi bi-heart-fill"></i></a>
+        {% if product.id in wishlist_content %}
+            <a href="{% url 'store:delete_from_wishlist_view' product.id %}" class="product-card__add-to-wishlist-button product-card__add-to-wishlist-button--active"><i class="bi bi-heart-fill"></i></a>
+        {% else %}
+            <a href="{% url 'store:add_to_wishlist_view' product.id %}" class="product-card__add-to-wishlist-button"><i class="bi bi-heart-fill"></i></a>
+        {% endif %}
     </div>
 </div>

@@ -78,6 +78,7 @@ TEMPLATES = [
                 'store.context_processors.get_categories',
                 'store.context_processors.get_number_of_items_in_cart',
                 'checkout.context_processor.sidepanel',
+                'store.context_processors.get_wishlist_content'
             ],
         },
     },
