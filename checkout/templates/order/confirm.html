@@ -10,13 +10,13 @@
         {%for confirm in confirms%}
     <div class="col-md-6">
     {{ confirm.order_by.errors }}
-    {{ confirm.order_by.label_tag }}
-        <div class="form-control"> {{ confirm.order_by }}</div>
+    Ordered by:
+        <div class="form-control text-center"> {{ confirm.order_by }}</div>
       </div>
     <div class="col-md-6">
     {{ confirm.created.errors }}
-    {{ confirm.created.label_tag }}
-    <div class="form-control">{{ confirm.created }}</div>
+    Beginning of purchase:
+    <div class="form-control text-center">{{ confirm.created|date:'d-m-Y' }}</div>
       </div>
     </div>
     </div>
@@ -26,15 +26,15 @@
     <div class="form row">
          <div class="col-md-3">
     {{ confirm.shipping.errors }}
-    {{ confirm.shipping.label_tag }}
+    Shipping:
     <div class="form-control">{{ confirm.shipping }}</div>
          </div>
 
 
     </div>
-        <div class="form my-3">
+        <div class="col-md-3">
     {{ confirm.payment_method.errors }}
-    {{ confirm.payment_method.label_tag }}
+    Payment method:
     <div class="form-control">{{ confirm.payment_method }}</div>
          </div>
             </div>
@@ -43,23 +43,23 @@
     <h2>Please provide your address.</h2>
     <div class="form-group">
     {{ confirm.address_street.errors }}
-    {{ confirm.address_street.label_tag }}
+    {{ confirm.address_street.name }}
    <div class="form-control"> {{ confirm.address_street }}</div>
   </div>
     <div class="form row">
          <div class="col-md-3">
     {{ confirm.address_city.errors }}
-    {{ confirm.address_city.label_tag }}
+    City name:
     <div class="form-control">{{ confirm.address_city }} </div>
          </div>
          <div class="col-md-3">
     {{ confirm.address_postal_code.errors }}
-    {{ confirm.address_postal_code.label_tag }}
+    Address postal code:
     <div class="form-control">{{ confirm.address_postal_code }}</div>
          </div>
   </div>
          {%endfor%}
-            <input type="submit" value="Submit" class="btn btn-lg col-12 my-3 btn-primary" >
+            <a class="btn btn-primary my-3 col-12" href="{% url 'final' %}" role="button">Confirm Purchase</a>
      </div>
     </div>
     {% include 'sidepanel/sidepanel.html' %}

@@ -70,7 +70,7 @@ class OrderStatus(models.Model):
 
 
 class Order(models.Model):
-    order_by = ForeignKey(User, on_delete=DO_NOTHING)
+    order_by = ForeignKey(User, on_delete=DO_NOTHING, verbose_name='Ordered by')
     ForeignKey(OrderStatus, on_delete=DO_NOTHING)
     created = DateTimeField(default=datetime.now, verbose_name='Beginning of purchase')
     address_street = CharField(max_length=256, verbose_name='')
