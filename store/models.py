@@ -1,4 +1,5 @@
 from datetime import datetime
+import json
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -90,3 +91,17 @@ class UnitOrder(models.Model):
     price = models.DecimalField(max_digits=12, decimal_places=2)
     def __str__(self):
         return f'{self.id}'
+
+
+class Wishlist(models.Model):
+    user = ForeignKey(User, on_delete=DO_NOTHING)
+    products = CharField(max_length=2048, null=False, default="{}")
+
+    def set_products(self, products):
+        self.products = json.dumps(products)
+
+    def get_products(self):
+        return json.loads(self.products)
+
+    def __str__(self):
+        return f"Wishlist #{self.id}"

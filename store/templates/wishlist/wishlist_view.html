@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div>Current wishlist:
+
+    {% for product in wishlist.products %}
+        <p>{{ product }}</p>
+    {% endfor %}
+
+</div>
+{%endblock %}

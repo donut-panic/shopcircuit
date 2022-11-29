@@ -1,10 +1,11 @@
 from random import sample
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import DetailView, ListView
 
-from store.models import Product, Category, UnitOrder, LeCategory
+from store.models import Product, Category, UnitOrder, LeCategory, Wishlist
 
 
 class StoreMainView(View):
@@ -166,3 +167,36 @@ class SearchView(ListView):
         else:
             queryset = queryset.none()
         return queryset
+
+
+class WishlistView(LoginRequiredMixin, View):
+    def get(self, request):
+        users_wishlist = Wishlist.objects.get(user=request.user.id)
+        print(users_wishlist.get_products())
+        return render(
+            request,
+            template_name="wishlist/wishlist_view.html",
+            context={"wishlist": users_wishlist.get_products()}
+        )
+
+
+class AddToWishlistView(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        user_wishlist = Wishlist.objects.get(user=request.user.id)
+        wishlist_content = user_wishlist.get_products()
+        if pk not in wishlist_content["products"]:
+            wishlist_content["products"].append(pk)
+        user_wishlist.set_products(wishlist_content)
+        user_wishlist.save()
+        return redirect("store:wishlist_view")
+
+
+class DeleteFromWishlistView(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        user_wishlist = Wishlist.objects.get(user=request.user.id)
+        wishlist_content = user_wishlist.get_products()
+        if pk in wishlist_content["products"]:
+            wishlist_content["products"].remove(pk)
+        user_wishlist.set_products(wishlist_content)
+        user_wishlist.save()
+        return redirect("store:wishlist_view")
