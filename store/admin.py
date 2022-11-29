@@ -1,16 +1,15 @@
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 
-from store.models import Product, Order, UnitOrder, Category, ShippingMethod, PaymentMethod, OrderStatus,  \
-    LeCategory
-
-
+from store.models import Product, Order, UnitOrder, Category, ShippingMethod, PaymentMethod, OrderStatus, \
+  LeCategory, Wishlist
 
 admin.site.register(ShippingMethod)
 admin.site.register(PaymentMethod)
 admin.site.register(OrderStatus)
 admin.site.register(Order)
 admin.site.register(UnitOrder)
+admin.site.register(Wishlist)
 
 
 

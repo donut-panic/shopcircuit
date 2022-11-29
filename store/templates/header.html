@@ -41,44 +41,20 @@
               <span class="nav__icon-text">My cart ({{ cart_items_number }})</span>
             </a>
           </div>
+          {% if user.is_authenticated %}
           <div class="nav__icon ms-5">
-            <a href="#" class="nav__link">
+            <a href="{% url 'store:wishlist_view' %}" class="nav__link">
               <i class="bi bi-heart-fill nav__icon-font"></i>
               <span class="nav__icon-text">Wishlist</span>
             </a>
           </div>
+          {% endif %}
         </div>
       </div>
     </div>
   </nav>
 
   <!-- CATEGORIES -->
-<!--<nav class="navbar navbar-expand-lg " style="background-color: #a478eb;">-->
-<!--  <div class="container">-->
-<!--    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--      <span class="navbar-toggler-icon"></span>-->
-<!--    </button>-->
-<!--    <div class="navbar-collapse" id="navbarNavDropdown">-->
-<!--      <ul class="navbar-nav">-->
-<!--        {% for category in categories %}-->
-<!--        <li class="nav-item dropdown">-->
-<!--          <div class="dropdown-list mx-3 py-2"  data-bs-hover="dropdown" aria-expanded="false">-->
-<!--            {{category}}-->
-<!--          </div>-->
-<!--          <ul class="dropdown-menu">-->
-<!--            {% for sub in subclasses %}-->
-<!--          {% if sub.category_id.pk == category.id %}-->
-<!--            <li><a class="dropdown-item" href="{% url 'store:leproduct_view' sub.id %}">{{sub.name}}</a></li>-->
-<!--            {% endif %}-->
-<!--            {% endfor %}-->
-<!--          </ul>-->
-<!--        </li>-->
-<!--        {% endfor %}-->
-<!--      </ul>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</nav>-->
-
   <nav class="categories">
     <div class="container">
       <ul class="categories__ul">
