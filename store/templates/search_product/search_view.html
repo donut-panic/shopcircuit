@@ -25,7 +25,12 @@
                             <a href="{% url 'store:add_product_to_cart_view' product.id %}" class="btn btn-primary me-2 add-to-cart-button" data-cart-id="{{ product.id }}"><i class="bi bi-cart-plus-fill"></i> Add to cart</a>
                         </div>
                     </div>
-                    <div class="search__add-to-wishlist"><a href="#" class="search__add-to-wishlist-button"><i class="bi bi-heart-fill"></i></a></div>
+                    <div class="search__add-to-wishlist">
+                        {% if product.id in wishlist_content %}
+                            <a href="{% url 'store:delete_from_wishlist_view' product.id %}" class="search__add-to-wishlist-button search__add-to-wishlist-button--active"><i class="bi bi-heart-fill"></i></a></div>
+                        {% else %}
+                            <a href="{% url 'store:add_to_wishlist_view' product.id %}" class="search__add-to-wishlist-button"><i class="bi bi-heart-fill"></i></a></div>
+                        {% endif %}
                 </div>
                 {% endfor %}
             </div>

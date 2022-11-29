@@ -101,8 +101,8 @@
     background-color: #f9fafb;
 }
 
-.search__add-to-wishlist-button:hover {
-    color: #0d6efd;
+.search__add-to-wishlist-button:hover, .search__add-to-wishlist-button--active {
+    color: #0d6efd !important;
     border-color: #0d6efd;
     background-color: #f9fafb;
 }
@@ -546,7 +546,7 @@ git bra}
     color: #6c757d;
 }
 
-.search__add-to-wishlist-button:hover {
+.search__add-to-wishlist-button:hover, .search__add-to-wishlist-button--active {
     border-color: #0d6efd;
     background-color: #f9fafb;
 }
