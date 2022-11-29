@@ -49,9 +49,15 @@
                             <div>TAX</div>
                             <div class="cart__sidebar-tax">${{ overall_tax|floatformat:2 }}</div>
                         </div>
+                        {% if user.is_authenticated %}
                         <div class="cart__sidebar-buttons">
                             <a href="{% url 'order_view' %}" class="btn btn-primary cart__checkout-button">Checkout</a>
                         </div>
+                        {% else %}
+                        <div class="cart__sidebar-buttons">
+                            <a href="{% url 'p_login' %}" class="btn btn-primary cart__checkout-button">Checkout</a>
+                        </div>
+                        {%endif%}
                     </div>
                 </div>
             </div>

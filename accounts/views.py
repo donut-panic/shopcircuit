@@ -2,11 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
+from django.shortcuts import resolve_url
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DetailView
 
 from accounts.forms import SignUpForm, UserProfileUpdateForm, LoginForm
 from accounts.models import Profile
+from shopcircuit import settings
 
 
 # Create your views here.
@@ -19,16 +21,17 @@ class SignUpView(CreateView):
 
 
 
-
 class ProfileUpdateView(UpdateView):
     template_name = "basic_interaction.html"
     form_class = UserProfileUpdateForm
     model = Profile
 
-    def get_initial(self):
-        return {'user': self.request.user}
     def get_success_url(self):
-        return reverse_lazy('profile_view', args=(self.object.id,))
+        return reverse('profile_view',
+                    args=[self.request.user.profile.id])
+
+
+
 
 
 
@@ -40,6 +43,7 @@ class ProfileDetailsView(LoginRequiredMixin, DetailView):
 class UpdatedLoginView(LoginView):
     form_class = LoginForm
 
+
     def form_valid(self, form):
         remember_me = form.cleaned_data['remember_me']
         if not remember_me:
@@ -47,7 +51,9 @@ class UpdatedLoginView(LoginView):
             self.request.session.modified = True
         return super(UpdatedLoginView, self).form_valid(form)
 
-
+    def get_success_url(self):
+        return reverse('profile_view',
+                    args=[self.request.user.profile.id])
 
 
 
@@ -57,3 +63,12 @@ def home(request):
     return HttpResponseRedirect(
         reverse('profile_view',
                 args=[request.user.profile.id]))
+
+
+
+
+
+
+
+
+

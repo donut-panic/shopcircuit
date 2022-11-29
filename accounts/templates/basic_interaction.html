@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
-{{ form.media }}
+{%load static%}
 {% block head %}
 {% endblock %}
 {% block content %}
 <div class="container">
-<form method="post" >
+<form method="post"  enctype="multipart/form-data">
   {% csrf_token %}
   {% if form %}
   {% for hidden_field in form.hidden_fields %}
@@ -44,7 +44,7 @@
     </div>
   {% endfor %}
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary my-2 col-12">Submit</button>
 </form>
 </div>
 {% endif %}

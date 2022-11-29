@@ -20,8 +20,10 @@ from django.template.defaulttags import url
 from django.urls import include, path
 
 from shopcircuit import settings
+from store.views import StoreMainView
 
 urlpatterns = [
+    path('', StoreMainView.as_view(), name="store_main_view"),
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
     path('accounts/', include('accounts.urls')),
