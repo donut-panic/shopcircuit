@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
+{% load add_float %}
 <div class="container">
-    <div class="row">
 {%for unit in unit_orders %}
     {% if forloop.first %}
-    <div class="col-6">
+    <div class=" container col-8">
         <div class="container p-2">
             <h1> Purchase complete !</h1>
-      <span class="h3 my-3">  Your order numbers is:
+      <span class="h3 my-3">  Number of your order:
           {{unit.order_id}}</span>
 <h3 class="my-2">The following items have been bought:</h3>
           <table class="table table-hover">
@@ -31,15 +31,34 @@
         </tbody>
 </table>
         <hr>
-            <span class="h3">Total price <sub class="text-muted h6">(with tax) </sub>: ${{ total_price }} </span>
+            <div class="row">
+                <div class="col">
+                    <div class="h3">Product price <sub class="text-muted h6">(with tax)</sub></div>
+                    <div class="h3">Delivery price <sub class="text-muted h6">(with tax)</sub></div>
+                </div>
+                <div class="col">
+            <div class="h3">${{ total_price }}</div>
             {% for detail in  order_detail%}
-            <span class="h3">Delivery price <sub class="text-muted h6">(with tax) </sub>: ${{detail.shipping.price|add:detail.shipping.tax}} </span>
+            <div class="h3">${{detail.shipping.price_with_tax}}</div>
             {% endfor %}
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                <div class="h3">Total price <sub class="text-muted h6">(with tax)</sub></div>
+                        </div>
+                    <div class="col">
+                {% for detail in order_detail%}
+                <div class="h3 mx-2"> ${{detail.shipping.price_with_tax|add_float:total_price}}</div>
+                {% endfor %}
+                        </div>
+            </div>
+           </div>
         </div>
     </div>
 
 <!--  right side     -->
-<div class="col-6">
+<div class="container col-10">
     <div class="container p-2">
         <h1 class="text-center">Order details of your purchase </h1>
     {%for detail in order_detail%}
@@ -87,7 +106,6 @@
         </div>
     {%endfor%}
         </div>
-</div>
 </div>
 </div>
 {% endblock %}

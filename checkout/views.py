@@ -74,6 +74,7 @@ class CheckOutView(View):
             unit_orders = UnitOrder.objects.filter(order_id=Order.objects
                                                    .filter(order_by=self.request.user).values()[0].get('id'))
             order_detail = Order.objects.filter(order_by=self.request.user)
+
             total_price = round(sum([float(i[0]) for i in list(unit_orders.values_list('price'))]),2)
             del request.session['cart']
             return render(request, 'final/final_view.html', {'unit_orders': unit_orders,
