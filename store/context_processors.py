@@ -1,6 +1,6 @@
 from django.template.defaultfilters import register
 
-from store.models import Category, LeCategory
+from store.models import Category, LeCategory, Wishlist
 
 
 def get_categories(request):
@@ -14,11 +14,13 @@ def get_categories(request):
         "single_categories": categories_without_subcategories
     }
 
+
 def get_subclasses(request):
     subclasses = LeCategory.objects.all()
     if subclasses:
         return {"subclasses": subclasses}
     return {}
+
 
 
 def get_number_of_items_in_cart(request):
@@ -27,3 +29,9 @@ def get_number_of_items_in_cart(request):
     return {"cart_items_number": 0}
 
 
+def get_wishlist_content(request):
+    if request.user.is_authenticated:
+        users_wishlist = Wishlist.objects.get(user=request.user.id)
+        wishlist_content = [int(i) for i in users_wishlist.get_products()["products"]]
+        return {"wishlist_content": wishlist_content}
+    return {"wishlist_content": []}

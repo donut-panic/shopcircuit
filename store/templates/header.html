@@ -55,7 +55,11 @@
           <div class="nav__icon ms-5">
             <a href="{% url 'store:wishlist_view' %}" class="nav__link">
               <i class="bi bi-heart-fill nav__icon-font"></i>
-              <span class="nav__icon-text">Wishlist</span>
+              {% if wishlist_content|length > 0 %}
+                <span class="nav__icon-text">Wishlist ({{ wishlist_content|length }})</span>
+              {% else %}
+                <span class="nav__icon-text">Wishlist</span>
+              {% endif %}
             </a>
           </div>
           {% endif %}
