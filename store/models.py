@@ -53,13 +53,13 @@ class Product(models.Model):
 
 
 class ShippingMethod(models.Model):
-    shipping_name = CharField(max_length=512, null=False)
-    service_type = CharField(max_length=512, null=False)
+    shipping_company = CharField(max_length=512, null=False)
+    service_name = CharField(max_length=512, null=False)
     price = DecimalField(max_digits=12, decimal_places=2, null=False)
     tax = DecimalField(max_digits=12, decimal_places=2, null=False)
 
     def __str__(self):
-        return self.shipping_name
+        return self.shipping_company
 
     @property
     def price_with_tax(self):
