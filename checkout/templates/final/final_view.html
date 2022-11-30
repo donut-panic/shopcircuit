@@ -5,11 +5,10 @@
 {%for unit in unit_orders %}
     {% if forloop.first %}
     <div class="col-6">
-        <span class="container m-2">
+        <div class="container p-2">
             <h1> Purchase complete !</h1>
       <span class="h3 my-3">  Your order numbers is:
           {{unit.order_id}}</span>
-
 <h3 class="my-2">The following items have been bought:</h3>
           <table class="table table-hover">
         <thead>
@@ -32,12 +31,17 @@
         </tbody>
 </table>
         <hr>
-    <sub class="h3">Total price </h3><sub class="text-muted h6">(with tax) </sub>: {{total_price}} $
-</span>
+            <span class="h3">Total price <sub class="text-muted h6">(with tax) </sub>: ${{ total_price }} </span>
+            {% for detail in  order_detail%}
+            <span class="h3">Delivery price <sub class="text-muted h6">(with tax) </sub>: ${{detail.shipping.price|add:detail.shipping.tax}} </span>
+            {% endfor %}
         </div>
+    </div>
+
+<!--  right side     -->
 <div class="col-6">
-    <div class="container m-2">
-        <h1 class="text-center p-2">Order details of your purchase </h1>
+    <div class="container p-2">
+        <h1 class="text-center">Order details of your purchase </h1>
     {%for detail in order_detail%}
         <div class="form-group row my-1">
             <label for='{{detail.order_by}}' class="col-3 col-form-label "><div style="font-weight: bold;">Ordered by:</div></label>
