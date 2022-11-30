@@ -15,7 +15,7 @@ admin.site.register(Wishlist)
 
 
 @admin.register(LeCategory)
-class ProfileAdmin(ModelAdmin):
+class LeCategoryAdmin(ModelAdmin):
   ordering = ['category_id']
   list_display = ['id','category_id', 'name']
   list_per_page = 20
@@ -35,7 +35,7 @@ class ProfileAdmin(ModelAdmin):
 
 
 @admin.register(Product)
-class ProfileAdmin(ModelAdmin):
+class ProductAdmin(ModelAdmin):
   ordering = ['id']
   list_display = ['id', 'name', 'category', 'subcategory', 'price']
   list_per_page = 20
