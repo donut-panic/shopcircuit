@@ -76,6 +76,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'accounts.contex_processors.profile_pic',
                 'store.context_processors.get_categories',
+                'store.context_processors.get_subclasses',
                 'store.context_processors.get_number_of_items_in_cart',
                 'checkout.context_processor.sidepanel',
             ],
@@ -174,7 +175,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
 
