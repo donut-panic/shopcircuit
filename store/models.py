@@ -4,8 +4,7 @@ import json
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import CharField, TextField, ForeignKey, DO_NOTHING, ImageField, DecimalField, IntegerField, \
-    DateTimeField
-
+    DateTimeField, CASCADE
 
 from smart_selects.db_fields import ChainedForeignKey
 from tinymce.models import HTMLField
@@ -17,6 +16,8 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
 
 class LeCategory(models.Model):
     category_id = ForeignKey(Category, on_delete=DO_NOTHING, default='other')
@@ -45,6 +46,11 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+
 
 class ShippingMethod(models.Model):
     shipping_company = CharField(max_length=512, null=False)
@@ -53,7 +59,11 @@ class ShippingMethod(models.Model):
     tax = DecimalField(max_digits=12, decimal_places=2, null=False)
 
     def __str__(self):
-        return self.service_name
+        return self.shipping_company
+
+    @property
+    def price_with_tax(self):
+        return float(self.price) + float(self.price) * float(self.tax)
 
 
 class PaymentMethod(models.Model):
@@ -85,8 +95,8 @@ class Order(models.Model):
 
 
 class UnitOrder(models.Model):
-    order_id = ForeignKey(Order, on_delete=DO_NOTHING)
-    product_id = ForeignKey(Product, on_delete=DO_NOTHING)
+    order_id = ForeignKey(Order, on_delete=CASCADE)
+    product_id = ForeignKey(Product, on_delete=CASCADE)
     quantity = IntegerField(null=False)
     price = models.DecimalField(max_digits=12, decimal_places=2)
     def __str__(self):

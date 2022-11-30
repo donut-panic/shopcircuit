@@ -21,13 +21,23 @@
         </form>
         <div class="nav__icons-area">
           <div class="nav__icon">
+            {% if user.is_authenticated %}
             {% if picture_profile %}
-            <a href="{% url 'home' %}" class="nav__link">
+            <a href="{% url 'home' %}" class="nav__link" style="text-decoration:none">
               <img src="{{picture_profile.url }}" class="profile__image">
               </a>
-            <a href="{% url 'logout' %}">
+            <a href="{% url 'logout' %}" style="text-decoration:none">
               <span class="nav__icon-text">Logout</span>
             </a>
+            {%else%}
+            <a href="{% url 'home' %}" class="nav__link">
+              <img src="{% static 'no_profile_picture.jpg' %}" class="profile__image">
+              </a>
+            <a href="{% url 'logout' %}" style="text-decoration:none">
+              <span class="nav__icon-text">Logout</span>
+            </a>
+            {%endif%}
+
             {% else %}
             <a href="{% url 'login' %}" class="nav__link">
               <i class="bi bi-person-fill nav__icon-font"></i>
@@ -73,6 +83,11 @@
               {% endfor %}
             </ul>
           </li>
+        {% endfor %}
+        {% for category in single_categories %}
+        <li class="categories__item">
+            <a href="{% url 'store:category_view' category.id %}" class="categories__link">{{ category.name }}</a>
+        </li>
         {% endfor %}
       </ul>
     </div>

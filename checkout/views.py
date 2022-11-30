@@ -53,7 +53,8 @@ class ConfirmView(View):
         return render(
             request,
             template_name="order/confirm.html",
-            context={"confirms": Order.objects.all()
+            context={"confirms": Order.objects.all(),
+
                      }
         )
 
@@ -72,11 +73,12 @@ class CheckOutView(View):
                 unitorder.save()
             unit_orders = UnitOrder.objects.filter(order_id=Order.objects
                                                    .filter(order_by=self.request.user).values()[0].get('id'))
-            total_price= round(sum([float(i[0]) for i in list(unit_orders.values_list('price'))]),2)
             order_detail = Order.objects.filter(order_by=self.request.user)
+
+            total_price = round(sum([float(i[0]) for i in list(unit_orders.values_list('price'))]),2)
             del request.session['cart']
             return render(request, 'final/final_view.html', {'unit_orders': unit_orders,
-                                                             'total_price':total_price,
+                                                             'total_price': total_price,
                                                              'order_detail': order_detail
                                                              }
                           )

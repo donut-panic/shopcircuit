@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
 {% block content %}
+{% load format_percent %}
 <div class="container  col-lg my-5">
     <div class="row">
      <div class="col-7">
@@ -9,53 +10,56 @@
     <div class="form row">
         {%for confirm in confirms%}
     <div class="col-md-6">
-    {{ confirm.order_by.errors }}
-    Ordered by:
+     <div class="m-2">Ordered by: </div>
         <div class="form-control text-center"> {{ confirm.order_by }}</div>
       </div>
     <div class="col-md-6">
-    {{ confirm.created.errors }}
-    Beginning of purchase:
+    <div class="m-2">Beginning of purchase:</div>
     <div class="form-control text-center">{{ confirm.created|date:'d-m-Y' }}</div>
       </div>
     </div>
     </div>
     <hr>
     <div class="container border rounded p-3">
-    <h2>Please provide your shipping and payment infomations.</h2>
+    <h2 class="p-2">Please provide your shipping and payment infomations.</h2>
     <div class="form row">
          <div class="col-md-3">
-    {{ confirm.shipping.errors }}
-    Shipping:
-    <div class="form-control">{{ confirm.shipping }}</div>
+    <div class="m-2">Shipping:</div>
+    <div class="form-control text-center">{{ confirm.shipping }}</div>
          </div>
-
-
+    <div class="col-md-3">
+    <div class="m-2">Shipping price:</div>
+        <div class="form-control text-center">${{ confirm.shipping.price }}</div>
+         </div>
+        <div class="col-md-3">
+    <div class="m-2">Service type:</div>
+    <div class="form-control text-center">{{ confirm.shipping.service_type }} </div>
+         </div>
+        <div class="col-md-3">
+    <div class="m-2">Tax:</div>
+    <div class="form-control text-center">{{ confirm.shipping.tax|format_percent }} </div>
+         </div>
     </div>
         <div class="col-md-3">
-    {{ confirm.payment_method.errors }}
-    Payment method:
-    <div class="form-control">{{ confirm.payment_method }}</div>
+    <div class="m-2">Payment method:</div>
+    <div class="form-control text-center">{{ confirm.payment_method }}</div>
          </div>
             </div>
     <hr>
      <div class="container border rounded p-3">
     <h2>Please provide your address.</h2>
     <div class="form-group">
-    {{ confirm.address_street.errors }}
-    {{ confirm.address_street.name }}
+    <div class="m-2">Full adress</div>
    <div class="form-control"> {{ confirm.address_street }}</div>
   </div>
     <div class="form row">
          <div class="col-md-3">
-    {{ confirm.address_city.errors }}
-    City name:
-    <div class="form-control">{{ confirm.address_city }} </div>
+    <div class="p-1">City name:</div>
+    <div class="form-control text-center">{{ confirm.address_city }} </div>
          </div>
          <div class="col-md-3">
-    {{ confirm.address_postal_code.errors }}
-    Address postal code:
-    <div class="form-control">{{ confirm.address_postal_code }}</div>
+    <div class="p-1">Address postal code:</div>
+    <div class="form-control text-center">{{ confirm.address_postal_code }}</div>
          </div>
   </div>
          {%endfor%}

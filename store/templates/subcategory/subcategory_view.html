@@ -13,7 +13,7 @@
                     <div class="product-card">
                         <div class="product-card__image-area">
                             {% if product.image %}
-                            <a href="{% url 'store:product_view' product.id %}"><img src={{ product.image.url }} class="product-card__image"></a>
+                            <a href="{% url 'store:product_view' product.id %}"><img src={{product.image.url}} class="product-card__image"></a>
                             {% else %}
                             <a href="{% url 'store:product_view' product.id %}"><img src="{% static 'placeholder.jpg' %}" class="product-card__image"></a>
                             {% endif %}
