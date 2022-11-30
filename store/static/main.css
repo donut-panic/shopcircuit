@@ -688,3 +688,11 @@ git bra}
     font-size: 1em;
     text-decoration: none;
 }
+
+/* STORE MAIN VIEW */
+.main-view__category-link {
+    text-decoration: none;
+    color: #212529;
+    transition: .2s;
+}
+
