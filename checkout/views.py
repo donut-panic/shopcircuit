@@ -83,8 +83,12 @@ class CheckOutView(View):
                                                              }
                           )
         else:
-            unit_orders = UnitOrder.objects.filter(order_id=Order.objects
+            try:
+                unit_orders = UnitOrder.objects.filter(order_id=Order.objects
                                                    .filter(order_by=self.request.user).values()[0].get('id'))
+            except TypeError:
+                return HttpResponseRedirect(reverse_lazy('store_main_view'))
+
             total_price = round(sum([float(i[0]) for i in list(unit_orders.values_list('price'))]), 2)
             order_detail = Order.objects.filter(order_by=self.request.user)
             return render(request, 'final/final_view.html', {'unit_orders': unit_orders,

@@ -6,6 +6,23 @@
      <div class="col-7">
 <form method="post">
     {% csrf_token %}
+
+<!--        added validation-->
+    {{ form.media }}
+  {% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+  {% endfor %}
+
+  {% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+      {% for error in form.non_field_errors %}
+        {{ error }}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+
+
 <!--        main panel-->
     <div class="container border rounded p-3">
     <div class="form row">
@@ -43,20 +60,71 @@
      <div class="container border rounded p-3">
     <h2>Please provide your address.</h2>
     <div class="form-group">
-    {{ form.address_street.errors }}
-    {{ form.address_street.label_tag }}
-    {{ form.address_street }}
-  </div>
+
+         {{ form.address_street.label_tag }}
+      {% if form.is_bound %}
+        {% if form.address_street.errors %}
+          {% render_field form.address_street class="form-control is-invalid" %}
+          {% for error in form.address_street.errors %}
+            <div class="invalid-feedback">
+              {{ error }}
+            </div>
+          {% endfor %}
+        {% else %}
+          {% render_field form.address_street class="form-control is-valid" %}
+        {% endif %}
+      {% else %}
+        {% render_field form.address_street class="form-control" %}
+      {% endif %}
+
+      {% if form.address_street.help_text %}
+        <small class="form-text text-muted">{{ form.address_street.help_text }}</small>
+      {% endif %}
+
+     </div>
+
     <div class="form row">
          <div class="col-md-3">
-    {{ form.address_city.errors }}
-    {{ form.address_city.label_tag }}
-    {{ form.address_city }}
+     {{ form.address_city.label_tag }}
+      {% if form.is_bound %}
+        {% if form.address_city.errors %}
+          {% render_field form.address_city class="form-control is-invalid" %}
+          {% for error in form.address_city.errors %}
+            <div class="invalid-feedback">
+              {{ error }}
+            </div>
+          {% endfor %}
+        {% else %}
+          {% render_field form.address_city class="form-control is-valid" %}
+        {% endif %}
+      {% else %}
+        {% render_field form.address_city class="form-control" %}
+      {% endif %}
+
+      {% if form.address_city.help_text %}
+        <small class="form-text text-muted">{{ form.address_city.help_text }}</small>
+      {% endif %}
          </div>
+
          <div class="col-md-3">
-    {{ form.address_postal_code.errors }}
     {{ form.address_postal_code.label_tag }}
-    {{ form.address_postal_code }}
+      {% if form.is_bound %}
+        {% if form.address_postal_code.errors %}
+          {% render_field form.address_postal_code class="form-control is-invalid" %}
+          {% for error in form.address_postal_code.errors %}
+            <div class="invalid-feedback">
+              {{ error }}
+            </div>
+          {% endfor %}
+        {% else %}
+          {% render_field form.address_postal_code class="form-control is-valid" %}
+        {% endif %}
+      {% else %}
+        {% render_field form.address_postal_code class="form-control" %}
+      {% endif %}
+      {% if form.address_postal_code.help_text %}
+        <small class="form-text text-muted">{{ form.address_postal_code.help_text }}</small>
+      {% endif %}
          </div>
   </div>
             <input type="submit" value="Submit" class="btn btn-lg col-12 my-3 btn-primary" >

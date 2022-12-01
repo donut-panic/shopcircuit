@@ -1,0 +1,16 @@
+{% load static%}
+
+
+<div class="container">
+    <div class="row text-center" >
+        {%for recently_viewed_product in recently_viewed_products %}
+        <div class="col-md-2 col-md-offset-1">
+            <a class="thumbnail" href="#">
+        <img class="img-responsive" src="{{recently_viewed_product_url}}" style="width:100%" alt="ftyfu">
+    </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+

@@ -14,7 +14,7 @@
                 {% for product in object_list %}
                 <div class="search__item">
                     <div class="search__photo">
-                        <a href="{% url 'store:product_view' product.id %}"><img src="{{ product.image.url }}" class="search__image"></a>
+                        <a href="{% url 'store:product_view' product.id %}"><img src="{{ product.image_url }}" class="search__image"></a>
                     </div>
                     <div class="search__info">
                         <div class="search__name"><a href="{% url 'store:product_view' product.id %}" class="search__name-link">{{ product.name }}</a></div>
