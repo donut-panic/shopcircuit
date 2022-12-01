@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 {% block content %}
 {% load format_percent %}
-<div class="container  col-lg my-5">
+<div class="container  col-lg my-5" style="word-break: break-word;">
     <div class="row">
      <div class="col-7">
 <!--        main panel-->
@@ -21,7 +21,7 @@
     </div>
     <hr>
     <div class="container border rounded p-3">
-    <h2 class="p-2">Please provide your shipping and payment infomations.</h2>
+    <h2 class="p-2">Shipping and payment information.</h2>
     <div class="form row">
          <div class="col-md-3">
     <div class="m-2">Shipping:</div>
@@ -33,7 +33,7 @@
          </div>
         <div class="col-md-3">
     <div class="m-2">Service type:</div>
-    <div class="form-control text-center">{{ confirm.shipping.service_type }} </div>
+    <div class="form-control text-center">{{ confirm.shipping.service_name }} </div>
          </div>
         <div class="col-md-3">
     <div class="m-2">Tax:</div>
@@ -47,18 +47,18 @@
             </div>
     <hr>
      <div class="container border rounded p-3">
-    <h2>Please provide your address.</h2>
+    <h2>Address provided</h2>
     <div class="form-group">
     <div class="m-2">Full adress</div>
    <div class="form-control"> {{ confirm.address_street }}</div>
   </div>
     <div class="form row">
-         <div class="col-md-3">
-    <div class="p-1">City name:</div>
+         <div class="col-md-4">
+    <div class="m-2">City name:</div>
     <div class="form-control text-center">{{ confirm.address_city }} </div>
          </div>
-         <div class="col-md-3">
-    <div class="p-1">Address postal code:</div>
+         <div class="col-md-4">
+    <div class="m-2">Address postal code:</div>
     <div class="form-control text-center">{{ confirm.address_postal_code }}</div>
          </div>
   </div>

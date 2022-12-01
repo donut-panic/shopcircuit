@@ -19,7 +19,7 @@ class AddOrderInfoForm(forms.ModelForm):
                    'address_street': forms.Textarea(attrs={'class': 'form-control', 'placeholder':
                        'Please eneter your full adress here', 'rows': 2}),
                    'address_postal_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder':
-                       'Postal-code'}),
+                       '00-000'}),
                    'address_city': forms.TextInput(attrs={'class': 'form-control', 'placeholder':
                        'City name'}),
                    'shipping': forms.Select(attrs={'class': 'form-control'}),

@@ -1,14 +1,17 @@
+from random import sample
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
-from django.shortcuts import resolve_url
+from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DetailView
 
 from accounts.forms import SignUpForm, UserProfileUpdateForm, LoginForm
 from accounts.models import Profile
-from shopcircuit import settings
+
+from store.models import Product
 
 
 # Create your views here.
@@ -68,6 +71,32 @@ def home(request):
 
 
 
+def product(request, product_id):
+    product = Product.objects.get(pk=product_id)
+    recently_viewed_products = None
+
+    if 'recently_viewed' in request.session:
+        if product_id in request.session['recently_viewed']:
+            request.session['recently_viewed'].remove(product_id)
+        products = Product.objects.filter(pk__in=request.session['recently_viewed'])
+        recently_viewed_products = sorted(products,
+            key=lambda x: request.session['recently_viewed'].index(x.id)
+            )
+        request.session['recently_viewed'].insert(0, product_id)
+        if len(request.session['recently_viewed']) > 5:
+            request.session['recently_viewed'].pop()
+    else:
+        request.session['recently_viewed'] = [product_id]
+        random_categories = sample(list(Product.objects.all('category_id')), 4)
+        for i in range(4):
+            request.session['recently_viewed'].insert(-1, random_categories[i])
+            if len(request.session['recently_viewed']) > 5:
+                request.session['recently_viewed'].pop()
+
+    request.session.modified = True
+
+    context = {'product': product, 'recently_viewed_products': recently_viewed_products}
+    return render(request, 'recent.html', context)
 
 
 

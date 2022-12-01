@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 {% load add_float %}
-<div class="container">
+<div class="grey-container">
+    <h1 class="text-center pb-2"> Purchase complete !</h1>
+    <div class="container">
+     <div class="final_view">
 {%for unit in unit_orders %}
     {% if forloop.first %}
-    <div class=" container col-8">
-        <div class="container p-2">
-            <h1> Purchase complete !</h1>
       <span class="h3 my-3">  Number of your order:
           {{unit.order_id}}</span>
 <h3 class="my-2">The following items have been bought:</h3>
@@ -40,72 +40,59 @@
             <div class="h3">${{ total_price }}</div>
             {% for detail in  order_detail%}
             <div class="h3">${{detail.shipping.price_with_tax}}</div>
+                  </div>
+                <div class="col"></div>
             {% endfor %}
-                </div>
-                <hr>
                 <div class="row">
                     <div class="col">
                 <div class="h3">Total price <sub class="text-muted h6">(with tax)</sub></div>
                         </div>
                     <div class="col">
                 {% for detail in order_detail%}
-                <div class="h3 mx-2"> ${{detail.shipping.price_with_tax|add_float:total_price}}</div>
-                {% endfor %}
-                        </div>
+                <div class="h3 mx-2 border-top"> ${{detail.shipping.price_with_tax|add_float:total_price}}</div>
+                    </div>
+                    <div class="col"></div>
+                    {% endfor %}
             </div>
            </div>
-        </div>
-    </div>
-
-<!--  right side     -->
-<div class="container col-10">
-    <div class="container p-2">
-        <h1 class="text-center">Order details of your purchase </h1>
+    <h1 class="text-center mt-3">Order details of your purchase </h1>
+         <hr>
+    <table class="table ">
     {%for detail in order_detail%}
-        <div class="form-group row my-1">
-            <label for='{{detail.order_by}}' class="col-3 col-form-label "><div style="font-weight: bold;">Ordered by:</div></label>
-            <div class="col-9 text-center  ">
-            <div class="form-control">{{detail.order_by}}</div>
-                </div>
-        </div>
-        <div class="form-group row my-1">
-    <label for='{{detail.created}}' class="col-3 col-form-label"><div style="font-weight: bold;">Date of purchase:</div></label></label>
-            <div class="col-9 text-center  ">
-            <div class="form-control">{{detail.created}}</div>
-                </div>
-        </div>
-        <div class="form-group row my-1">
-    <label for='{{detail.address_street}}' class="col-3 col-form-label"><div style="font-weight: bold;">Street name:</div></label></label>
-            <div class="col-9 text-center">
-            <div class="form-control">{{detail.address_street}}</div>
-                </div>
-        </div>
-        <div class="form-group row my-1">
-    <label for='{{detail.address_postal_code}}' class="col-3 col-form-label"><div style="font-weight: bold;">Post code:</div></label></label>
-            <div class="col-9 text-center">
-            <div class="form-control">{{detail.address_postal_code}}</div>
-                </div>
-        </div>
-        <div class="form-group row my-1">
-    <label for='{{detail.address_city}}' class="col-3 col-form-label"><div style="font-weight: bold;">City name:</div></label></label>
-            <div class="col-9 text-center">
-            <div class="form-control">{{detail.address_city}}</div>
-                </div>
-        </div>
-        <div class="form-group row my-1">
-    <label for='{{detail.shipping}}' class="col-3 col-form-label"><div style="font-weight: bold;">Shipping method:</div></label></label>
-            <div class="col-9 text-center">
-            <div class="form-control">{{detail.shipping}}</div>
-                </div>
-        </div>
-        <div class="form-group row my-1">
-    <label for='{{detail.payment_method}}' class="col-3 col-form-label"><div style="font-weight: bold;">Paying with:</div></label></label>
-            <div class="col-9 text-center">
-            <div class="form-control">{{detail.payment_method}}</div>
-                </div>
-        </div>
-    {%endfor%}
-        </div>
+    <div class="h4">
+    <tr>
+    <th class="col">Ordered by:</th>
+    <th class="col">{{detail.order_by}}</th>
+    </tr>
+    <tr>
+    <th class="col">Date of purchase:</th>
+    <th class="col">{{detail.created}}</th>
+    </tr>
+    <tr>
+    <th class="col">Street name:</th>
+    <th class="col">{{detail.address_street}}</th>
+    </tr>
+    <tr>
+    <th class="col">Post code:</th>
+    <th class="col">{{detail.address_postal_code}}</th>
+    </tr>
+    <tr>
+        <th class="col">City name:</th>
+    <th class="col">{{detail.address_city}}</th>
+    </tr>
+    <tr>
+        <th class="col">Shipping method:</th>
+    <th class="col">{{detail.shipping}}</th>
+    </tr>
+    <tr>
+        <th class="col">Paying with:</th>
+    <th class="col">{{detail.payment_method}}</th>
+    </tr>
+
+  </div>
+    {% endfor%}
+         </table>
+         </div>
 </div>
 </div>
 {% endblock %}
