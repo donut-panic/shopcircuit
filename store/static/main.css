@@ -729,4 +729,16 @@ git bra}
     transition: .2s;
 }
 
+/* CHECKOUT FINAL */
+
+.checkout-final {
+    box-shadow: 0 1px 2px rgb(51 51 51 / 7%);
+    border-radius: .35rem;
+    border: 1px solid rgba(81,88,94,.12);
+    transition: .2s;
+    overflow: hidden;
+    background: #fff;
+    margin-bottom: 30px;
+    padding: 50px;
+}
 

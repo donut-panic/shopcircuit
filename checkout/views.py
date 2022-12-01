@@ -91,7 +91,7 @@ class CheckOutView(View):
 
             total_price = round(sum([float(i[0]) for i in list(unit_orders.values_list('price'))]), 2)
             order_detail = Order.objects.filter(order_by=self.request.user)
-            return render(request, 'final/final_view.html', {'unit_orders': unit_orders,
+            return render(request, 'final/checkout_final_view.html', {'unit_orders': unit_orders,
                                                              'total_price': total_price,
                                                              'order_detail': order_detail
                                                              }
