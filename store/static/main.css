@@ -126,17 +126,23 @@
 
 .nav__search {
     flex-grow: 1;
-    margin-right: 100px;
 }
 
 .nav__icons-area {
     display: flex;
+    margin-left: 100px;
 }
 
 .nav__link {
     color: #9da1a7;
     text-decoration: none;
     transition: .2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav__icon-area {
+    height: 24px;
 }
 
 .nav__link:hover {
@@ -147,7 +153,7 @@
     display: block;
     font-size: 15pt;
     text-align: center;
-    line-height: 1em;
+    line-height: 24px;
 }
 
 .nav__icon-text {
@@ -158,6 +164,21 @@
     border: 1px solid #ced4da;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.nav__user-image-area {
+    width: 24px;
+    height: 24px;
+    margin: 0 auto;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.nav__user-image {
+    display: block;
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
 }
 
 /* CATEGORIES */
@@ -689,6 +710,7 @@ git bra}
     text-decoration: none;
 }
 
+
 /* Final View */
 
 .final_view {
@@ -699,3 +721,12 @@ git bra}
     word-break: break-word;
     box-shadow: 0 1px 2px rgb(51 51 51 / 7%);
 }
+
+/* STORE MAIN VIEW */
+.main-view__category-link {
+    text-decoration: none;
+    color: #212529;
+    transition: .2s;
+}
+
+
