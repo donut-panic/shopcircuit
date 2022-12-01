@@ -22,39 +22,52 @@
         <div class="nav__icons-area">
           <div class="nav__icon">
             {% if user.is_authenticated %}
-            {% if picture_profile %}
-            <a href="{% url 'home' %}" class="nav__link" style="text-decoration:none">
-              <img src="{{picture_profile.url }}" class="profile__image">
-              </a>
-            <a href="{% url 'logout' %}" style="text-decoration:none">
-              <span class="nav__icon-text">Logout</span>
-            </a>
-            {%else%}
-            <a href="{% url 'home' %}" class="nav__link">
-              <img src="{% static 'no_profile_picture.jpg' %}" class="profile__image">
-              </a>
-            <a href="{% url 'logout' %}" style="text-decoration:none">
-              <span class="nav__icon-text">Logout</span>
-            </a>
-            {%endif%}
-
+              {% if picture_profile %}
+                <a href="{% url 'home' %}" class="nav__link">
+                  <div class="nav__icon-area">
+                    <div class="nav__user-image-area">
+                      <img src="{{ picture_profile.url }}" class="nav__user-image">
+                    </div>
+                  </div>
+                </a>
+                <a href="{% url 'logout' %}" class="nav__link">
+                  <span class="nav__icon-text">Logout</span>
+                </a>
+              {% else %}
+                <a href="{% url 'home' %}" class="nav__link">
+                  <div class="nav__icon-area">
+                    <div class="nav__user-image-area">
+                      <img src="{% static 'no_profile_picture.jpg' %}" class="nav__user-image">
+                    </div>
+                  </div>
+                </a>
+                <a href="{% url 'logout' %}" class="nav__link">
+                  <span class="nav__icon-text">Logout</span>
+                </a>
+              {% endif %}
             {% else %}
-            <a href="{% url 'login' %}" class="nav__link">
-              <i class="bi bi-person-fill nav__icon-font"></i>
-              <span class="nav__icon-text">Login</span>
-            </a>
-          {% endif %}
+              <a href="{% url 'login' %}" class="nav__link">
+                <div class="nav__icon-area">
+                  <i class="bi bi-person-fill nav__icon-font"></i>
+                </div>
+                <span class="nav__icon-text">Login</span>
+              </a>
+            {% endif %}
           </div>
           <div class="nav__icon ms-5">
               <a href="{% url 'store:cart_view' %}" class="nav__link">
-              <i class="bi bi-cart-fill nav__icon-font"></i>
+                <div class="nav__icon-area">
+                  <i class="bi bi-cart-fill nav__icon-font"></i>
+                </div>
               <span class="nav__icon-text">My cart ({{ cart_items_number }})</span>
             </a>
           </div>
           {% if user.is_authenticated %}
           <div class="nav__icon ms-5">
             <a href="{% url 'store:wishlist_view' %}" class="nav__link">
-              <i class="bi bi-heart-fill nav__icon-font"></i>
+              <div class="nav__icon-area">
+                <i class="bi bi-heart-fill nav__icon-font"></i>
+              </div>
               {% if wishlist_content|length > 0 %}
                 <span class="nav__icon-text">Wishlist ({{ wishlist_content|length }})</span>
               {% else %}

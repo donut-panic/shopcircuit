@@ -14,6 +14,7 @@ class StoreMainView(View):
         context = []
         for i in random_categories:
             context.append({
+                "id": i.id,
                 "name": i.name,
                 "products": Product.objects.filter(category=i.id)[:4]
             })
