@@ -2,12 +2,14 @@ from datetime import datetime
 import json
 
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models import CharField, TextField, ForeignKey, DO_NOTHING, ImageField, DecimalField, IntegerField, \
-    DateTimeField, CASCADE
+    DateTimeField, CASCADE, OneToOneField
 
 from smart_selects.db_fields import ChainedForeignKey
 from tinymce.models import HTMLField
+from django.utils.text import gettext_lazy as _
 
 
 # Create your models here.
@@ -85,8 +87,8 @@ class Order(models.Model):
     ForeignKey(OrderStatus, on_delete=DO_NOTHING)
     created = DateTimeField(default=datetime.now, verbose_name='Beginning of purchase')
     address_street = CharField(max_length=256, verbose_name='')
-    address_postal_code = CharField(max_length=18)
-    address_city = CharField(max_length=128, verbose_name='City name')
+    address_postal_code = CharField(max_length=6, validators=[RegexValidator('^[0-9]{2}-[0-9]{3}$', _('Postal code must be numbers in form of "00-000"'))])
+    address_city = CharField(max_length=128, verbose_name='City name', validators=[RegexValidator('^[a-zA-Z]+$', _('You have to use only letters in this form'))])
     shipping = ForeignKey(ShippingMethod, on_delete=DO_NOTHING)
     payment_method = ForeignKey(PaymentMethod, on_delete=DO_NOTHING, default=1)
 
@@ -104,7 +106,7 @@ class UnitOrder(models.Model):
 
 
 class Wishlist(models.Model):
-    user = ForeignKey(User, on_delete=DO_NOTHING)
+    user = OneToOneField(User, on_delete=CASCADE)
     products = CharField(max_length=2048, null=False, default="{}")
 
     def set_products(self, products):

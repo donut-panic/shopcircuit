@@ -13,12 +13,14 @@
         <p><b>Gender:</b> <span class="text-secondary" >{{ profile.gender|default:"Not specified" }}</span></p>
     <a href= "{{user.profile.id}}/update">Update your data here</a>
         </div>
+
         <div class="col">
     <div class="list-group list-inline" id="speciesList">
      <p class="text text-secondary">Jump to:</p>
-     <a class='scrolldown-click' role='button' href='#My-cart'><div class='label label-sm label-success speciesDiv'>My cart</div></a>
-     <a class='scrolldown-click' role='button' href='#Shop-Homepage'><div class='label label-sm label-success speciesDiv'>Shop Homepage</div></a>
-     <a class='scrolldown-click' role='button' href='#Wishlist'><div class='label label-sm label-success speciesDiv'>Wishlist</div></a>
+     <a class='scrolldown-click' role='button' href="{% url 'store:cart_view' %}"> <div class='label label-sm label-success speciesDiv'>My cart</div></a>
+     <a class='scrolldown-click' role='button' href="{% url 'store:store_main_view' %}"><div class='label label-sm label-success speciesDiv'>Shop Homepage</div></a>
+     <a class='scrolldown-click' role='button' href="{% url 'store:wishlist_view' %}"><div class='label label-sm label-success speciesDiv'>Wishlist</div></a>
+     <a class='scrolldown-click' role='button' href="{% url 'password_change' %}"><div class='label label-sm label-success speciesDiv'>Change Password</div></a>
 </div>
         </div>
         <div class="col">
@@ -26,13 +28,14 @@
         </div>
     </div>
     <hr>
-    <div class="col-8 py-2">
-        <b class="h3">Some info on me:</b>
+    <div class=" py-2">
+        <div class="h3 mb-3">Some info on me:</div>
         <div class="shadow p-3 mb-5 bg-white rounded">
         {{ profile.biography|safe }}
         </div>
         </div>
 </div>
 
+{% include 'recent/recent_panel.html' %}
 {% endblock %}
 

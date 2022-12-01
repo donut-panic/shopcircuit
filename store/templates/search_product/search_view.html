@@ -14,13 +14,13 @@
                 {% for product in object_list %}
                 <div class="search__item">
                     <div class="search__photo">
-                        <a href="{% url 'store:product_view' product.id %}"><img src="{{ product.image.url }}" class="search__image"></a>
+                        <a href="{% url 'store:product_view' product.id %}"><img src="{{ product.image_url }}" class="search__image"></a>
                     </div>
                     <div class="search__info">
                         <div class="search__name"><a href="{% url 'store:product_view' product.id %}" class="search__name-link">{{ product.name }}</a></div>
                         <div class="search__price">${{ product.price }}</div>
                         <div class="search__details"><a href="{% url 'store:category_view' product.category.id %}" class="search__details-link">{{ product.category.name }}</a> » <a href="{% url 'store:leproduct_view' product.subcategory.id %}" class="search__details-link">{{ product.subcategory.name }}</a></div>
-                        <div class="search__description">{{ product.description|truncatechars:255 }}</div>
+                        <div class="search__description">{{ product.description|truncatechars:255|safe }}</div>
                         <div class="search__buttons">
                             <a href="{% url 'store:add_product_to_cart_view' product.id %}" class="btn btn-primary me-2 add-to-cart-button" data-cart-id="{{ product.id }}"><i class="bi bi-cart-plus-fill"></i> Add to cart</a>
                         </div>
