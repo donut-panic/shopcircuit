@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block content %}
+{% load add_float %}
+<div class="grey-container">
+    <div class="container">
+        <h1 class="mb-5">Purchase completed!</h1>
+    </div>
+    <div class="container">
+        <div class="checkout-final">
+            <div>
+                {% for unit in unit_orders %}
+                    {% if forloop.first %}
+                        <h4 class="mb-4">Order number: {{ unit.order_id }}</h4>
+                        <h4 class="mb-3">The following items have been bought:</h4>
+                        <table class="table table-hover mb-5">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price (tax included)</th>
+                                </tr>
+                            </thead>
+                    {% endif %}
+                            <tbody>
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ unit.product_id }}</td>
+                                <td>{{ unit.quantity }}</td>
+                                <td>{{ unit.price }} $</td>
+                            </tr>
+                {% endfor %}
+                            </tbody>
+                        </table>
+
+                <div class="row mb-5">
+                    <div class="col">
+                        <div class="h3">Product price <span class="text-muted h6">(with tax)</span></div>
+                        <div class="h3">Delivery price <span class="text-muted h6">(with tax)</span></div>
+                    </div>
+                    <div class="col">
+                        <div class="h3 mb-2">${{ total_price }}</div>
+                        {% for detail in order_detail %}
+                        <div class="h3 mb-2">${{ detail.shipping.price_with_tax|floatformat:2 }}</div>
+                      </div>
+                    <div class="col"></div>
+                        {% endfor %}
+                    <div class="row">
+                        <div class="col">
+                    <div class="h3">Total price <sub class="text-muted h6">(with tax)</sub></div>
+                            </div>
+                        <div class="col">
+                    {% for detail in order_detail%}
+                    <div class="h3 mx-2 border-top"> ${{detail.shipping.price_with_tax|add_float:total_price}}</div>
+                        </div>
+                        <div class="col"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <h1 class="mb-3">Order details of your purchase </h1>
+                <table class="table ">
+                {% for detail in order_detail %}
+                <div class="h4">
+                <tr>
+                <th class="col">Ordered by:</th>
+                <th class="col">{{detail.order_by}}</th>
+                </tr>
+                <tr>
+                <th class="col">Date of purchase:</th>
+                <th class="col">{{detail.created}}</th>
+                </tr>
+                <tr>
+                <th class="col">Street name:</th>
+                <th class="col">{{detail.address_street}}</th>
+                </tr>
+                <tr>
+                <th class="col">Post code:</th>
+                <th class="col">{{detail.address_postal_code}}</th>
+                </tr>
+                <tr>
+                <th class="col">City name:</th>
+                <th class="col">{{detail.address_city}}</th>
+                </tr>
+                <tr>
+                <th class="col">Shipping method:</th>
+                <th class="col">{{detail.shipping}}</th>
+                </tr>
+                <tr>
+                <th class="col">Paying with:</th>
+                <th class="col">{{detail.payment_method}}</th>
+                </tr>
+                </div>
+                {% endfor%}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
