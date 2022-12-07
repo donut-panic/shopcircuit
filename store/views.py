@@ -1,11 +1,12 @@
 from random import sample
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView, ListView
 
-from store.models import Product, Category, UnitOrder, LeCategory, Wishlist
+from store.models import Product, Category, UnitOrder, LeCategory, WishlistItem
 
 
 class StoreMainView(View):
@@ -169,34 +170,28 @@ class SearchView(ListView):
         return queryset
 
 
-class WishlistView(LoginRequiredMixin, View):
-    def get(self, request):
-        users_wishlist = Wishlist.objects.get(user=request.user.id)
-        wishlist_content = [int(i) for i in users_wishlist.get_products()["products"]]
-        return render(
-            request,
-            template_name="wishlist/wishlist_view.html",
-            context={"wishlist": Product.objects.filter(pk__in=wishlist_content)}
-        )
+class WishlistView(LoginRequiredMixin, ListView):
+    """Main view for displaying the wishlist."""
+    template_name = "wishlist/wishlist_view.html"
+
+    def get_queryset(self):
+        wishlisted_items = WishlistItem.objects.select_related('product').filter(user=self.request.user)
+        return [wishlisted_item.product for wishlisted_item in wishlisted_items]
 
 
 class AddToWishlistView(LoginRequiredMixin, View):
+    """Adds new WishlistItem object to database."""
     def get(self, request, pk):
-        user_wishlist = Wishlist.objects.get(user=request.user.id)
-        wishlist_content = user_wishlist.get_products()
-        if pk not in wishlist_content["products"]:
-            wishlist_content["products"].append(pk)
-        user_wishlist.set_products(wishlist_content)
-        user_wishlist.save()
+        added_product = get_object_or_404(Product, pk=pk)
+        if added_product:
+            if not WishlistItem.objects.filter(user=request.user, product=added_product).exists():
+                WishlistItem(user=request.user, product=added_product).save()
         return redirect("store:wishlist_view")
 
 
 class DeleteFromWishlistView(LoginRequiredMixin, View):
+    """Removes WishlistItem object from database."""
     def get(self, request, pk):
-        user_wishlist = Wishlist.objects.get(user=request.user.id)
-        wishlist_content = user_wishlist.get_products()
-        if pk in wishlist_content["products"]:
-            wishlist_content["products"].remove(pk)
-        user_wishlist.set_products(wishlist_content)
-        user_wishlist.save()
+        wishlist_item = get_object_or_404(WishlistItem, user=request.user.id, product_id=pk)
+        wishlist_item.delete()
         return redirect("store:wishlist_view")

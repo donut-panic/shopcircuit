@@ -1,6 +1,6 @@
 from django.template.defaultfilters import register
 
-from store.models import Category, LeCategory, Wishlist
+from store.models import Category, LeCategory, WishlistItem, Product
 
 
 def get_categories(request):
@@ -30,8 +30,8 @@ def get_number_of_items_in_cart(request):
 
 
 def get_wishlist_content(request):
+    """Retrieves wishlisted products for authenticated user."""
     if request.user.is_authenticated:
-        users_wishlist = Wishlist.objects.get(user=request.user.id)
-        wishlist_content = [int(i) for i in users_wishlist.get_products()["products"]]
-        return {"wishlist_content": wishlist_content}
+        wishlisted_items = WishlistItem.objects.select_related('product').filter(user=request.user)
+        return {"wishlist_content": [wishlisted_item.product for wishlisted_item in wishlisted_items]}
     return {"wishlist_content": []}

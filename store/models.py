@@ -1,11 +1,10 @@
 from datetime import datetime
-import json
 
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.db import models
-from django.db.models import CharField, TextField, ForeignKey, DO_NOTHING, ImageField, DecimalField, IntegerField, \
-    DateTimeField, CASCADE, OneToOneField
+from django.db.models import CharField, ForeignKey, DO_NOTHING, ImageField, DecimalField, IntegerField, \
+    DateTimeField, CASCADE
 
 from smart_selects.db_fields import ChainedForeignKey
 from tinymce.models import HTMLField
@@ -101,19 +100,14 @@ class UnitOrder(models.Model):
     product_id = ForeignKey(Product, on_delete=CASCADE)
     quantity = IntegerField(null=False)
     price = models.DecimalField(max_digits=12, decimal_places=2)
+
     def __str__(self):
         return f'{self.id}'
 
 
-class Wishlist(models.Model):
-    user = OneToOneField(User, on_delete=CASCADE)
-    products = CharField(max_length=2048, null=False, default="{}")
-
-    def set_products(self, products):
-        self.products = json.dumps(products)
-
-    def get_products(self):
-        return json.loads(self.products)
+class WishlistItem(models.Model):
+    user = ForeignKey(User, on_delete=CASCADE, null=False)
+    product = ForeignKey(Product, on_delete=CASCADE, null=False)
 
     def __str__(self):
-        return f"Wishlist #{self.id}"
+        return f"Wishlist item #{self.id}"

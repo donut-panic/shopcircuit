@@ -8,7 +8,7 @@
             <h2 class="mb-5">Your wishlist</h2>
         </div>
         <div class="row">
-            {% for product in wishlist %}
+            {% for product in object_list %}
                 <div class="col-3">
                     {% include '../product/product_card.html' %}
                 </div>

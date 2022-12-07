@@ -27,7 +27,7 @@
                     </div>
                     {% if user.is_authenticated %}
                         <div class="search__add-to-wishlist">
-                            {% if product.id in wishlist_content %}
+                            {% if product in wishlist_content %}
                                 <a href="{% url 'store:delete_from_wishlist_view' product.id %}" class="search__add-to-wishlist-button search__add-to-wishlist-button--active"><i class="bi bi-heart-fill"></i></a>
                             {% else %}
                                 <a href="{% url 'store:add_to_wishlist_view' product.id %}" class="search__add-to-wishlist-button"><i class="bi bi-heart-fill"></i></a>
