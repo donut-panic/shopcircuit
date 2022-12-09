@@ -2,7 +2,6 @@ from random import sample
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView, ListView
 
@@ -64,6 +63,9 @@ class ProductView(DetailView):
         context["subcategory"] = LeCategory.objects.get(id=self.get_object().subcategory.id)
         context["similar_products"] = Product.objects.filter(category=self.object.category).exclude(id=self.object.id)[:4]
         return context
+
+
+# CART VIEWS
 
 
 class AddProductToCartView(View):
@@ -141,21 +143,14 @@ class DecreaseQuantityInCart(View):
         return redirect("store:cart_view")
 
 
-def search_venues(request):
-    if request.method == "POST":
-        searched = request.POST.get('searched')
-        venues = Product.objects.filter(name__icontains=searched)
-        return render(request,
-                      'search_product/search_view.html', {'searched': searched, 'venues': venues})
-    else:
-        return render(request,
-                      'search_product/search_view.html', {})
+# SEARCH VIEWS
 
 
 class SearchView(ListView):
-    template_name = "search_product/search_view.html"
+    """The main view for displaying searching results."""
+    template_name = "search/search_view.html"
     model = Product
-    paginate_by = 20
+    paginate_by = 10
 
     def get_queryset(self):
         queryset = Product.objects.select_related("category", "subcategory").all()
@@ -168,6 +163,9 @@ class SearchView(ListView):
         else:
             queryset = queryset.none()
         return queryset
+
+
+# WISHLIST VIEWS
 
 
 class WishlistView(LoginRequiredMixin, ListView):

@@ -1,8 +1,7 @@
-from django.template.defaulttags import url
 from django.urls import path
 
 from store.views import StoreMainView, StoreCategoryView, ProductView, AddProductToCartView, CartView, \
-    DeleteFromCartView, IncreaseQuantityInCart, DecreaseQuantityInCart, LeStoreCategoryView, search_venues, SearchView, \
+    DeleteFromCartView, IncreaseQuantityInCart, DecreaseQuantityInCart, LeStoreCategoryView, SearchView, \
     WishlistView, AddToWishlistView, DeleteFromWishlistView
 
 app_name = "store"
@@ -17,8 +16,8 @@ urlpatterns = [
     path("cart/delete/<pk>", DeleteFromCartView.as_view(), name="delete_from_cart_view"),
     path("cart/increase/<pk>", IncreaseQuantityInCart.as_view(), name="increase_quantity_in_cart_view"),
     path("cart/decrease/<pk>", DecreaseQuantityInCart.as_view(), name="decrease_quantity_in_cart_view"),
-    path('search/', SearchView.as_view(), name='search_products'),
-    path('wishlist/', WishlistView.as_view(), name='wishlist_view'),
-    path('wishlist/add/<pk>', AddToWishlistView.as_view(), name='add_to_wishlist_view'),
-    path('wishlist/delete/<pk>', DeleteFromWishlistView.as_view(), name='delete_from_wishlist_view'),
+    path("search/", SearchView.as_view(), name="search_products"),
+    path("wishlist/", WishlistView.as_view(), name='wishlist_view'),
+    path("wishlist/add/<int:pk>", AddToWishlistView.as_view(), name='add_to_wishlist_view'),
+    path("wishlist/delete/<int:pk>", DeleteFromWishlistView.as_view(), name='delete_from_wishlist_view'),
 ]
