@@ -9,8 +9,8 @@
         </div>
         <div class="row mb-5">
             <div class="subcategories">
-                {% for subcategory in lecategories %}
-                    <a href="{% url 'store:leproduct_view' subcategory.id %}" class="subcategories__badge">{{ subcategory.name }}</a>
+                {% for subcategory in subcategories %}
+                    <a href="{% url 'store:subcategory_view' subcategory.id %}" class="subcategories__badge">{{ subcategory.name }}</a>
                 {% endfor %}
             </div>
         </div>

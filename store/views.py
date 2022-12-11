@@ -36,12 +36,13 @@ class CategoryView(View):
             context={
                 "products_list": Product.objects.filter(category_id=pk),
                 "category": Category.objects.get(id=pk),
-                "lecategories": Subcategory.objects.filter(category_id_id=pk),
+                "subcategories": Subcategory.objects.filter(category_id_id=pk),
             }
         )
 
 
-class LeStoreCategoryView(View):
+class SubcategoryView(View):
+    """View for displaying subcategory."""
     def get(self, request, pk):
         return render(
             request,

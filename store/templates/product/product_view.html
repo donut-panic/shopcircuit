@@ -5,7 +5,7 @@
 <div class="white-container">
     <div class="container mb-5">
         <div class="breadcrumbs">
-            <a href="{% url 'store:category_view' category.id %}" class="breadcrumbs__link">{{ category.name }}</a> » <a href="{% url 'store:leproduct_view' subcategory.id %}" class="breadcrumbs__link">{{ subcategory.name }}</a> » <span class="breadcrumbs__link">{{ product.name }}</span>
+            <a href="{% url 'store:category_view' category.id %}" class="breadcrumbs__link">{{ category.name }}</a> » <a href="{% url 'store:subcategory_view' subcategory.id %}" class="breadcrumbs__link">{{ subcategory.name }}</a> » <span class="breadcrumbs__link">{{ product.name }}</span>
         </div>
     </div>
     <div class="container mb-5">

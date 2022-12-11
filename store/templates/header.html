@@ -91,7 +91,7 @@
             <ul class="categories__dropdown-content">
               {% for subcategory in subclasses %}
                 {% if subcategory.category_id.pk == category.id %}
-                  <li class="categories__dropdown-item"><a href="{% url 'store:leproduct_view' subcategory.id %}" class="categories__dropdown-link">{{ subcategory.name }}</a></li>
+                  <li class="categories__dropdown-item"><a href="{% url 'store:subcategory_view' subcategory.id %}" class="categories__dropdown-link">{{ subcategory.name }}</a></li>
                 {% endif %}
               {% endfor %}
             </ul>
