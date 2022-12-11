@@ -1,6 +1,4 @@
-from django.template.defaultfilters import register
-
-from store.models import Category, LeCategory, WishlistItem, Product
+from store.models import Category, LeCategory, WishlistItem
 
 
 def get_categories(request):
@@ -16,14 +14,15 @@ def get_categories(request):
 
 
 def get_subclasses(request):
+    """Retrieves subcategories."""
     subclasses = LeCategory.objects.all()
     if subclasses:
         return {"subclasses": subclasses}
     return {}
 
 
-
 def get_number_of_items_in_cart(request):
+    """Retriever number of items in cart."""
     if "cart" in request.session:
         return {"cart_items_number": len(request.session["cart"])}
     return {"cart_items_number": 0}

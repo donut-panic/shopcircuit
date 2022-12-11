@@ -7,13 +7,13 @@ def sidepanel(request):
     overall_tax = 0
     if "cart" in request.session:
         overall_price = 0
-        for item in request.session["cart"]:
-            product = Product.objects.select_related("category").get(id=item["id"])
-            total_price = product.price * item["quantity"]
+        for (product_id, quantity) in request.session["cart"].items():
+            product = Product.objects.select_related("category").get(id=product_id)
+            total_price = product.price * quantity
             tax = (total_price * product.tax)
             in_cart.append({
                 "product": product,
-                "quantity": item["quantity"],
+                "quantity": quantity,
                 "total_price": total_price,
                 "tax": tax
             })

@@ -1,10 +1,9 @@
 from random import sample
-
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic import DetailView, ListView
-
 from store.models import Product, Category, UnitOrder, LeCategory, WishlistItem
 
 
@@ -53,6 +52,7 @@ class LeStoreCategoryView(View):
 
 
 class ProductView(DetailView):
+    """Detailed view for the product page."""
     model = Product
     template_name = "product/product_view.html"
 
@@ -65,85 +65,101 @@ class ProductView(DetailView):
         return context
 
 
-# CART VIEWS
-
-
 class AddProductToCartView(View):
+    """View for adding products to the shopping cart."""
     def get(self, request, pk):
-        cart = request.session.get("cart")
-        if cart:
-            for item in cart:
-                if item["id"] == pk:
-                    item["quantity"] += 1
-                    break
+        try:
+            product = Product.objects.get(id=pk)
+            pk = str(product.id)
+            cart = request.session.get("cart")
+            if cart:
+                if pk in cart:
+                    cart[pk] += 1
+                else:
+                    cart.update({pk: 1})
+                request.session["cart"] = cart
             else:
-                cart.append({"id": pk, "quantity": 1})
-            request.session["cart"] = cart
-        else:
-            request.session["cart"] = [{"id": pk, "quantity": 1}]
-        return redirect("store:cart_view")
+                request.session["cart"] = {pk: 1}
+            return redirect("store:cart_view")
+        except Product.DoesNotExist:
+            return HttpResponse("sorry but this item does not exists")
 
 
 class CartView(View):
+    """Main view for displaying cart."""
     def get(self, request):
-        in_cart = []
-        overall_price = 0
-        overall_tax = 0
-        if "cart" in request.session:
-            overall_price = 0
-            for item in request.session["cart"]:
-                product = Product.objects.select_related("category").get(id=item["id"])
-                total_price = product.price * item["quantity"]
-                tax = (total_price * product.tax)
-                in_cart.append({
+        cart_summary = []
+        cart = request.session.get("cart")
+        total_price = 0
+        total_tax = 0
+        if cart:
+            total_price = 0
+            products_in_cart = Product.objects.select_related("category").filter(id__in=request.session["cart"].keys())
+            for product in products_in_cart:
+                quantity = cart[str(product.id)]
+                product_total_price = product.price * quantity
+                tax = (product_total_price * product.tax)
+                cart_summary.append({
                     "product": product,
-                    "quantity": item["quantity"],
-                    "total_price": total_price,
+                    "quantity": quantity,
+                    "total_price": product_total_price,
                     "tax": tax
                 })
-                overall_price += total_price
-                overall_tax += tax
-
-
+                total_price += product_total_price
+                total_tax += tax
         return render(
             request,
             template_name="cart/cart_view.html",
             context={
-                "products": in_cart if len(in_cart) > 0 else None,
-                "overall_price": overall_price,
-                "overall_tax": overall_tax
+                "products": cart_summary if len(cart_summary) > 0 else None,
+                "total_price": total_price,
+                "total_tax": total_tax
             }
         )
 
 
 class DeleteFromCartView(View):
+    """View for deleting product from cart."""
     def get(self, request, pk):
-        cart = request.session["cart"]
-        request.session["cart"] = [item for item in cart if item["id"] != pk]
-        return redirect("store:cart_view")
+        try:
+            cart = request.session["cart"]
+            cart.pop(pk)
+            request.session["cart"] = cart
+            return redirect("store:cart_view")
+        except KeyError:
+            return HttpResponse("can't remove product that is not in the cart")
 
 
 class IncreaseQuantityInCart(View):
+    """View for increasing product quantity in cart."""
     def get(self, request, pk):
-        cart = request.session["cart"]
-        for item in cart:
-            if item["id"] == pk:
-                item["quantity"] -= 1
-        request.session["cart"] = [item for item in cart if item["quantity"] > 0]
-        return redirect("store:cart_view")
+        cart = request.session.get("cart")
+        try:
+            product = Product.objects.get(id=pk)
+            if cart and pk in cart:
+                if cart[pk] + 1 <= product.quantity:
+                    cart[pk] += 1
+            request.session["cart"] = cart
+            return redirect("store:cart_view")
+        except Product.DoesNotExist:
+            return HttpResponse("no such product so cant increase")
 
 
 class DecreaseQuantityInCart(View):
+    """View for decreasing product quantity in cart."""
     def get(self, request, pk):
-        cart = request.session["cart"]
-        for item in cart:
-            if item["id"] == pk:
-                item["quantity"] += 1
-        request.session["cart"] = cart
-        return redirect("store:cart_view")
-
-
-# SEARCH VIEWS
+        cart = request.session.get("cart")
+        try:
+            product = Product.objects.get(id=pk)
+            if cart and pk in cart:
+                if cart[pk] - 1 < 1:
+                    cart.pop(pk)
+                else:
+                    cart[pk] -= 1
+            request.session["cart"] = cart
+            return redirect("store:cart_view")
+        except Product.DoesNotExist:
+            return HttpResponse("no such product so cant increase")
 
 
 class SearchView(ListView):
@@ -163,9 +179,6 @@ class SearchView(ListView):
         else:
             queryset = queryset.none()
         return queryset
-
-
-# WISHLIST VIEWS
 
 
 class WishlistView(LoginRequiredMixin, ListView):

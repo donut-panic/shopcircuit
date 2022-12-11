@@ -29,9 +29,9 @@
                                 </div>
                             </div>
                             <div class="cart__quantity">
-                                <a href="{% url 'store:increase_quantity_in_cart_view' product.product.id %}" class="cart__button cart__button--left">-</a>
+                                <a href="{% url 'store:decrease_quantity_in_cart_view' product.product.id %}" class="cart__button cart__button--left">-</a>
                                 <input type="text" class="cart__input" placeholder="{{ product.quantity }}" readonly>
-                                <a href="{% url 'store:decrease_quantity_in_cart_view' product.product.id %}" class="cart__button cart__button--right">+</a>
+                                <a href="{% url 'store:increase_quantity_in_cart_view' product.product.id %}" class="cart__button cart__button--right">+</a>
                             </div>
                             <div class="cart__price"><div class="cart__price-part">${{ product.total_price }}</div><div class="cart__percent-part">(VAT: {{ product.product.tax|format_percent }})</div></div>
                             <div class="cart__delete">
@@ -45,11 +45,11 @@
                     <div class="cart__sidebar">
                         <div class="cart__total-price mb-3">
                             <div>Total price</div>
-                            <div class="cart__sidebar-price">${{ overall_price }}</div>
+                            <div class="cart__sidebar-price">${{ total_price }}</div>
                         </div>
                         <div class="cart__total-tax pb-4 mb-4">
                             <div>TAX</div>
-                            <div class="cart__sidebar-tax">${{ overall_tax|floatformat:2 }}</div>
+                            <div class="cart__sidebar-tax">${{ total_tax|floatformat:2 }}</div>
                         </div>
                         {% if user.is_authenticated %}
                         <div class="cart__sidebar-buttons">
