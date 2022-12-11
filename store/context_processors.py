@@ -1,8 +1,8 @@
-from store.models import Category, LeCategory, WishlistItem
+from store.models import Category, Subcategory, WishlistItem
 
 
 def get_categories(request):
-    parents_id_that_have_childs = LeCategory.objects.filter(category_id_id__isnull=False).values_list('category_id_id',
+    parents_id_that_have_childs = Subcategory.objects.filter(category_id_id__isnull=False).values_list('category_id_id',
                                                                                                       flat=True)
     categories_with_subcategories = Category.objects.filter(id__in=list(set(parents_id_that_have_childs)))
     categories_all = Category.objects.all()
@@ -15,7 +15,7 @@ def get_categories(request):
 
 def get_subclasses(request):
     """Retrieves subcategories."""
-    subclasses = LeCategory.objects.all()
+    subclasses = Subcategory.objects.all()
     if subclasses:
         return {"subclasses": subclasses}
     return {}

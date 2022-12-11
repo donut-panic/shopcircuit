@@ -4,29 +4,31 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic import DetailView, ListView
-from store.models import Product, Category, UnitOrder, LeCategory, WishlistItem
+from store.models import Product, Category, UnitOrder, Subcategory, WishlistItem
 
 
 class StoreMainView(View):
+    """Main view for the store."""
     def get(self, request):
+        categories = []
         random_categories = sample(list(Category.objects.all()), 4)
-        context = []
-        for i in random_categories:
-            context.append({
-                "id": i.id,
-                "name": i.name,
-                "products": Product.objects.filter(category=i.id)[:4]
+        for category in random_categories:
+            categories.append({
+                "id": category.id,
+                "name": category.name,
+                "products": Product.objects.filter(category=category.id)[:4]
             })
         return render(
             request,
             template_name="main/store_main_view.html",
             context={
-                "random_categories": context
+                "random_categories": categories
             }
         )
 
 
-class StoreCategoryView(View):
+class CategoryView(View):
+    """View for displaying category."""
     def get(self, request, pk):
         return render(
             request,
@@ -34,7 +36,7 @@ class StoreCategoryView(View):
             context={
                 "products_list": Product.objects.filter(category_id=pk),
                 "category": Category.objects.get(id=pk),
-                "lecategories": LeCategory.objects.filter(category_id_id=pk),
+                "lecategories": Subcategory.objects.filter(category_id_id=pk),
             }
         )
 
@@ -46,7 +48,7 @@ class LeStoreCategoryView(View):
             template_name="category/category_view.html",
             context={
                 "products_list": Product.objects.filter(subcategory_id=pk),
-                "category": LeCategory.objects.get(id=pk),
+                "category": Subcategory.objects.get(id=pk),
             }
         )
 
@@ -60,7 +62,7 @@ class ProductView(DetailView):
         context = super().get_context_data(**kwargs)
         context["orders"] = UnitOrder.objects.filter(product_id=self.get_object()).count()
         context["category"] = Category.objects.get(id=self.get_object().category.id)
-        context["subcategory"] = LeCategory.objects.get(id=self.get_object().subcategory.id)
+        context["subcategory"] = Subcategory.objects.get(id=self.get_object().subcategory.id)
         context["similar_products"] = Product.objects.filter(category=self.object.category).exclude(id=self.object.id)[:4]
         return context
 
