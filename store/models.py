@@ -80,7 +80,7 @@ class OrderStatus(models.Model):
 
 class Order(models.Model):
     order_by = ForeignKey(User, on_delete=DO_NOTHING, verbose_name="Ordered by")
-    ForeignKey(OrderStatus, on_delete=DO_NOTHING)
+    order_status = ForeignKey(OrderStatus, on_delete=DO_NOTHING)
     created = DateTimeField(default=datetime.now, verbose_name="Beginning of purchase")
     address_street = CharField(max_length=256, verbose_name="")
     address_postal_code = CharField(max_length=6, validators=[RegexValidator("^[0-9]{2}-[0-9]{3}$", _("Postal code must be numbers in form of '00-000'"))])
