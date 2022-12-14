@@ -1,0 +1,9 @@
+.main-view {
+
+    &__category-link {
+        transition: $transition;
+        text-decoration: none;
+        color: #212529;
+    }
+
+}

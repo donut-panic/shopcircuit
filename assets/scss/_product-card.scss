@@ -1,0 +1,87 @@
+.product-card {
+    @include rounded-card;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+
+    &:hover {
+        @include rounded-card-hover;
+    }
+
+    &__image-area {
+        @include flex(row, center, center);
+        background: #fff;
+        border-bottom: 1px solid rgba(81, 88, 94, .12);
+    }
+
+    &__image {
+        display: block;
+        height: 200px;
+        object-fit: contain;
+    }
+
+    &__data {
+        padding: 20px;
+        height: 120px;
+    }
+
+    &__name {
+        font-size: 1em;
+        text-decoration: none;
+        color: #51585e;
+
+        &__hover {
+            color: $blue;
+        }
+
+    }
+
+    &__price {
+        font-size: 1em;
+        margin-bottom: 0px;
+        color: #000;
+        font-weight: bold;
+    }
+
+    &__buttons {
+        @include flex(row, start, center);
+        padding: 0 20px 10px 20px;
+    }
+
+    &__availability {
+        font-size: .8em;
+        text-align: left;
+        padding: 0 20px 20px 20px;
+        color: #ccc;
+    }
+
+    &__add-to-wishlist {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
+
+    &__add-to-wishlist-button {
+        transition: $transition;
+        display: block;
+        width: 34px;
+        height: 34px;
+        background-color: #fff;
+        border-radius: .35rem;
+        border: 1px solid #dee2e6;
+        transition: .2s;
+        line-height: 34px;
+        text-align: center;
+        color: #6c757d;
+        font-size: 1em;
+    }
+
+    &__add-to-wishlist-button--active, &__add-to-wishlist-button:hover {
+        color: $blue;
+        border-color: #0d6efd;
+        background-color: #f9fafb;
+    }
+
+}

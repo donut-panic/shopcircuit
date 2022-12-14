@@ -1,0 +1,14 @@
+.breadcrumbs {
+
+    &__link {
+        transition: $transition;
+        text-decoration: none;
+        color: #9da1a7;
+
+        &:hover {
+            color: rgba(33, 37, 41, .7);
+        }
+
+    }
+
+}

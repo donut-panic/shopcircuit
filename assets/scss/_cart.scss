@@ -1,0 +1,128 @@
+.cart {
+
+    &__delete {
+        margin-left: 50px;
+    }
+
+    &__sidebar {
+        @include rounded-card;
+        background: #fff;
+        padding: 30px;
+    }
+
+    &__total-price {
+        @include flex(row, space-between, baseline);
+    }
+
+    &__total-tax {
+        @include flex(row, space-between, baseline);
+        border-bottom: 1px solid rgba(81,88,94,.12);
+    }
+
+    &__sidebar-price {
+        font-size: 1.3em;
+        font-weight: bold;
+    }
+
+    &__checkout-button {
+        width: 100%;
+    }
+
+    &__narrative {
+        font-size: 2em;
+        text-align: center;
+        color: #ccc;
+    }
+
+    &__product {
+        @include rounded-card;
+        @include flex(row, space-between, center);
+        background: #fff;
+        padding: 30px;
+    }
+
+    &__image-link {
+        text-decoration: none;
+    }
+
+    &__image {
+        width: 72px;
+        height: 72px;
+        border: 1px solid #dee2e6;
+        border-radius: 0.35rem;
+        background-color: #fff;
+    }
+
+    &__product-link {
+        color: #51585e;
+        text-decoration: none;
+    }
+
+    &__product-area {
+        @include flex(row, flex-start, center);
+        flex-grow: 1;
+    }
+
+    &__quantity {
+        @include flex();
+    }
+
+    &__button {
+        transition: $transition;
+        text-decoration: none;
+        text-align: center;
+        width: 42px;
+        line-height: 1.5em;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 0.35rem;
+        font-size: 1.4em;
+        font-weight: bold;
+        color: rgb(153, 153, 153);
+
+        &:hover {
+            background: #f9fafb;
+            border-color: #c1c9d0;
+        }
+
+        &--left {
+            border-right: none;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        &--right {
+            border-left: none;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+    }
+
+    &__product-category {
+        color: #9da1a7;
+        text-decoration: none;
+    }
+
+    &__input {
+        border: 1px solid #dee2e6;
+        background: #f9f9f9;
+        height: 40px;
+        width: 80px;
+        text-align: center;
+    }
+
+    &__price {
+        color: #212529;
+        font-weight: bold;
+        margin-left: 50px;
+        width: 100px;
+        text-align: center;
+    }
+
+    &__percent-part {
+        font-size: .8em;
+        font-weight: normal;
+    }
+
+}

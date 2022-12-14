@@ -1,0 +1,44 @@
+.footer {
+    background-color: #0d6efd;
+    padding: 35px 0 10px 0;
+    color: #fff;
+
+    &__container {
+        border-bottom: 1px solid rgba(255, 255, 255, .3);
+    }
+
+    &__menu-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__menu-item {
+        margin-bottom: 10px;
+
+        &--bold {
+            font-weight: bold;
+        }
+    }
+
+    &__menu-link {
+        transition: $transition;
+        color: rgba(255, 255, 255, .7);
+        text-decoration: none;
+
+        &:hover {
+            color: rgba(255, 255, 255, 1);
+        }
+
+    }
+
+    &__logo {
+        width: 200px;
+        opacity: .5;
+    }
+
+    &__copy {
+        color: rgba(255, 255, 255, .3);
+    }
+
+}

@@ -1,0 +1,117 @@
+.search {
+
+    &__item {
+        @include flex(row, flex-start, stretch);
+        @include rounded-card;
+        transition: $transition;
+        background: #fff;
+        margin-bottom: 30px;
+        position: relative;
+
+        &:hover {
+            @include rounded-card-hover;
+        }
+
+    }
+
+    &__photo {
+        @include flex(row, center, center);
+        flex-shrink: 0;
+        width: 200px;
+        border-right: 1px solid rgba(81,88,94,.12);
+    }
+
+    &__add-to-wishlist {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    &__add-to-wishlist-button {
+        transition: $transition;
+        display: block;
+        width: 40px;
+        height: 40px;
+        background-color: #fff;
+        border-radius: .35rem;
+        border: 1px solid #dee2e6;
+        line-height: 40px;
+        text-align: center;
+        color: #6c757d;
+
+        &:hover, &--active {
+            color: #0d6efd;
+            border-color: #0d6efd;
+            background-color: #f9fafb;
+        }
+
+    }
+
+    &__image {
+        display: block;
+        height: 160px;
+        width: 160px;
+    }
+
+    &__name {
+        margin-bottom: 5px;
+    }
+
+    &__name-link {
+        transition: $transition;
+        color: #212529;
+        text-decoration: none;
+    }
+
+    &__price {
+        color: #212529;
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+
+    &__details {
+        margin-bottom: 5px;
+    }
+
+    &__info {
+        padding: 20px 50px 20px 20px;
+    }
+
+    &__description {
+        color: #9da1a7;
+        margin-bottom: 10px;
+    }
+
+    &__details-link {
+        color: #9da1a7;
+        text-decoration: none;
+        transition: .2s;
+
+        &:hover {
+            color: #212529;
+        }
+
+    }
+
+    &__not-found {
+        @include flex(row, center, center);
+    }
+
+    &__glass {
+        width: 120px;
+        margin-right: 50px;
+    }
+
+    &__not-found-header {
+        color: #9da1a7;
+        font-size: 2em;
+    }
+
+    &__add-to-wishlist-button {
+
+    }
+
+}

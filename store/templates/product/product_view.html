@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div class="white-container">
+<div class="pt-5 pb-5">
     <div class="container mb-5">
         <div class="breadcrumbs">
             <a href="{% url 'store:category_view' category.id %}" class="breadcrumbs__link">{{ category.name }}</a> » <a href="{% url 'store:subcategory_view' subcategory.id %}" class="breadcrumbs__link">{{ subcategory.name }}</a> » <span class="breadcrumbs__link">{{ product.name }}</span>

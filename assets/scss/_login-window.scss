@@ -1,0 +1,13 @@
+.login {
+    @include rounded-card;
+    width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    overflow: hidden;
+
+    &__forgot-link {
+        font-size: 1em;
+        text-decoration: none;
+    }
+
+}
