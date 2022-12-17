@@ -57,7 +57,7 @@ class ShippingMethod(models.Model):
     tax = DecimalField(max_digits=12, decimal_places=2, null=False)
 
     def __str__(self):
-        return self.shipping_company
+        return f"{self.service_name} ({self.shipping_company})"
 
     @property
     def price_with_tax(self):
@@ -81,10 +81,11 @@ class OrderStatus(models.Model):
 class Order(models.Model):
     order_by = ForeignKey(User, on_delete=DO_NOTHING, verbose_name="Ordered by")
     order_status = ForeignKey(OrderStatus, on_delete=DO_NOTHING)
-    created = DateTimeField(default=datetime.now, verbose_name="Beginning of purchase")
-    address_street = CharField(max_length=256, verbose_name="")
-    address_postal_code = CharField(max_length=6, validators=[RegexValidator("^[0-9]{2}-[0-9]{3}$", _("Postal code must be numbers in form of '00-000'"))])
-    address_city = CharField(max_length=128, verbose_name="City name", validators=[RegexValidator("^[a-zA-Z]+$", _("You have to use only letters in this form"))])
+    phone = CharField(max_length=30, null=False, blank=False)
+    street = CharField(max_length=255, null=False, blank=False)
+    house = CharField(max_length=255, null=False, blank=False)
+    city = CharField(max_length=255, null=False, blank=False)
+    postal_code = CharField(max_length=255, null=False, blank=False)
     shipping = ForeignKey(ShippingMethod, on_delete=DO_NOTHING)
     payment_method = ForeignKey(PaymentMethod, on_delete=DO_NOTHING, default=1)
 

@@ -20197,4 +20197,64 @@ body {
   object-fit: contain;
 }
 
+.order-form__content {
+  box-shadow: 0 1px 2px rgba(51, 51, 51, 0.07);
+  border-radius: 0.35rem;
+  border: 1px solid rgba(81, 88, 94, 0.12);
+  background: #fff;
+  transition: 0.2s;
+  padding: 40px;
+}
+.order-form__sidebar {
+  box-shadow: 0 1px 2px rgba(51, 51, 51, 0.07);
+  border-radius: 0.35rem;
+  border: 1px solid rgba(81, 88, 94, 0.12);
+  background: #fff;
+  transition: 0.2s;
+  padding: 40px;
+}
+.order-form__products {
+  box-shadow: 0 1px 2px rgba(51, 51, 51, 0.07);
+  border-radius: 0.35rem;
+  border: 1px solid rgba(81, 88, 94, 0.12);
+  background: #fff;
+  transition: 0.2s;
+  padding: 40px;
+}
+.order-form__products-area {
+  height: 100px;
+  overflow-y: scroll;
+}
+.order-form__radio-card {
+  border: 1px solid #dee2e6;
+  padding: 10px;
+  border-radius: 0.35rem;
+}
+.order-form__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 101px;
+  border-bottom: 1px solid #dee2e6;
+}
+.order-form__item-link {
+  text-decoration: none;
+  transition: 0.2s;
+  color: rgba(33, 37, 41, 0.7);
+}
+.order-form__item-image-area {
+  margin-right: 20px;
+}
+.order-form__item-image {
+  display: block;
+  width: 70px;
+  height: 70px;
+  border-radius: 0.35rem;
+  border: 1px solid #dee2e6;
+}
+.order-form__item-description-area {
+  flex-grow: 1;
+}
+
 /*# sourceMappingURL=main.css.map */

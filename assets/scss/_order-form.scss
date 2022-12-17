@@ -1,0 +1,57 @@
+.order-form {
+
+    &__content {
+        @include rounded-card();
+        padding: 40px;
+    }
+
+    &__sidebar {
+        @include rounded-card();
+        padding: 40px;
+    }
+
+    &__products {
+        @include rounded-card();
+        padding: 40px;
+    }
+
+    &__products-area {
+        height: 100px;
+        overflow-y: scroll;
+    }
+
+    &__radio-card {
+        border: 1px solid #dee2e6;
+        padding: 10px;
+        border-radius: .35rem;
+    }
+
+    &__item {
+        @include flex(row, space-between, center);
+        height: 101px;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    &__item-link {
+        text-decoration: none;
+        transition: $transition;
+        color: rgba(33, 37, 41, 0.7);
+    }
+
+    &__item-image-area {
+        margin-right: 20px;
+    }
+
+    &__item-image {
+        display: block;
+        width: 70px;
+        height: 70px;
+        border-radius: .35rem;
+        border: 1px solid #dee2e6;
+    }
+
+    &__item-description-area {
+        flex-grow: 1;
+    }
+
+}

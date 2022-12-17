@@ -61,8 +61,7 @@ class OrderStatusAdmin(ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(ModelAdmin):
-    ordering = ["created"]
-    list_display = ["order_by", "order_status", "created", "address_street", "address_postal_code", "address_city", "shipping", "payment_method"]
+    list_display = ["order_by", "order_status", "street", "postal_code", "city", "shipping", "payment_method"]
     list_per_page = 20
     list_filter = ["order_status", "payment_method"]
 
